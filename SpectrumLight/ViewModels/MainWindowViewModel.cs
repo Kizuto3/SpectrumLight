@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using SpectrumLight.CommonObjects.Abstractions.Models;
 using System.Diagnostics;
 
 namespace SpectrumLight.ViewModels
@@ -12,6 +13,8 @@ namespace SpectrumLight.ViewModels
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
+
+        public IHexagonsContainer HexagonContainer { get; }
 
         public DelegateCommand LightOnOffCommand { get; }
 

@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -97,6 +99,14 @@
     <PackageReference Include="Prism.DryIoc" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Abstractions\SpectrumLight.CommonObjects.Abstractions.csproj">
+      <Project>{e72bd89a-bf72-4dac-9443-bac599e640a7}</Project>
+      <Name>SpectrumLight.CommonObjects.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Implementations\SpectrumLight.CommonObjects.Implementations.csproj">
+      <Project>{ce3c30a0-f360-4088-ae47-78625a6fa8e6}</Project>
+      <Name>SpectrumLight.CommonObjects.Implementations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf.Ui\SpectrumLight.CommonObjects.Wpf.Ui.csproj">
       <Project>{d5ef5220-b55d-4470-99ab-7c483087ffeb}</Project>
       <Name>SpectrumLight.CommonObjects.Wpf.Ui</Name>
