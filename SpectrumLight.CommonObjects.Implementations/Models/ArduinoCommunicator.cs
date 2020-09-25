@@ -1,14 +1,10 @@
 ﻿using SpectrumLight.CommonObjects.Abstractions.Models;
-using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SpectrumLight.CommonObjects.Implementations.Models
 {
-    class ArduinoCommunicator : IArduinoCommunicator
+    public class ArduinoCommunicator : IArduinoCommunicator
     {
         public event SerialDataReceivedEventHandler DataRecieved = (s, e) => { };
         public int BaudRate { get; } = 56700;

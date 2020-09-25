@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using SpectrumLight.CommonObjects.Abstractions;
 using SpectrumLight.CommonObjects.Abstractions.Models;
 using System.Diagnostics;
 
@@ -18,8 +19,9 @@ namespace SpectrumLight.ViewModels
 
         public DelegateCommand LightOnOffCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(ISpectrumLightFactory spectrumLightFactory)
         {
+            spectrumLightFactory.RegisterTypes();
             LightOnOffCommand = new DelegateCommand(LightOnOff);
         }
 

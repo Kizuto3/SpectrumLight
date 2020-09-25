@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using SpectrumLight.CommonObjects.Abstractions.Models;
 
 namespace SpectrumLight.CommonObjects.Implementations.Models

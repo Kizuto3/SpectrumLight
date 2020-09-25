@@ -3,10 +3,8 @@ using SpectrumLight.CommonObjects.Abstractions.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Management;
 using System.Management.Automation;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SpectrumLight.CommonObjects.Implementations.Helpers

@@ -1,7 +1,7 @@
 ﻿using SpectrumLight.Views;
 using Prism.Ioc;
-using Prism.Modularity;
 using System.Windows;
+using SpectrumLight.DependencyInjection;
 
 namespace SpectrumLight
 {
@@ -17,7 +17,7 @@ namespace SpectrumLight
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            DiHelpers.RegisterApplicationTypes(containerRegistry);
         }
     }
 }

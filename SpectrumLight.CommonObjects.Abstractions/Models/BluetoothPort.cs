@@ -1,10 +1,5 @@
 ﻿using SpectrumLight.CommonObjects.Abstractions.Enums;
-using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpectrumLight.CommonObjects.Abstractions.Models
 {
