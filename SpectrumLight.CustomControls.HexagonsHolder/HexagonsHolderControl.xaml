@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Canvas>
+        <Canvas x:Name="Holder">
             <hexagon:HexagonControl Width="100" LightOnOff="{Binding Path=LightOnOff, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HexagonsHolderControl}}}"/>
             <hexagon:HexagonControl Canvas.Left="200" Width="100" LightOnOff="{Binding Path=LightOnOff, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HexagonsHolderControl}}}"/>
         </Canvas>

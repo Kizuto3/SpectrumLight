@@ -1,28 +1,26 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
-using SpectrumLight.CommonObjects.Abstractions;
 using SpectrumLight.CommonObjects.Abstractions.Models;
+using SpectrumLight.CommonObjects.Implementations.Models;
+using SpectrumLight.CommonObjects.Wpf.Abstractions;
 using System.Diagnostics;
 
 namespace SpectrumLight.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : BaseViewModel
     {
-        private string _title = "Prism Application";
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        public IHexagonsContainer HexagonContainer { get; }
+        public HexagonsContainer HexagonContainer { get; }
 
         public DelegateCommand LightOnOffCommand { get; }
 
-        public MainWindowViewModel(ISpectrumLightFactory spectrumLightFactory)
+        public MainWindowViewModel(IApplicationModel applicationModel) : base (applicationModel)
         {
-            spectrumLightFactory.RegisterTypes();
+            ApplicationModel.CreateSession();
+            HexagonContainer = new HexagonsContainer();
             LightOnOffCommand = new DelegateCommand(LightOnOff);
+            HexagonContainer.AddHexagon(0, 0, 0, 0, 0);
+            HexagonContainer.AddHexagon(0, 0, 0, 0, 0);
+            HexagonContainer.AddHexagon(0, 0, 0, 0, 0);
+            HexagonContainer.AddHexagon(0, 0, 0, 0, 0);
         }
 
         private void LightOnOff()

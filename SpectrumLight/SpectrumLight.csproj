@@ -118,6 +118,10 @@
       <Project>{d5ef5220-b55d-4470-99ab-7c483087ffeb}</Project>
       <Name>SpectrumLight.CommonObjects.Wpf.Ui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj">
+      <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
+      <Name>SpectrumLight.CommonObjects.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.HexagonsHolder\SpectrumLight.CustomControls.HexagonsHolder.csproj">
       <Project>{c77df244-5546-4988-98d6-033d9489cd80}</Project>
       <Name>SpectrumLight.CustomControls.HexagonsHolder</Name>

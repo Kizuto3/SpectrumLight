@@ -10,6 +10,11 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
     {
         public ObservableCollection<IHexagon> Hexagons { get; }
 
+        public HexagonsContainer()
+        {
+            Hexagons = new ObservableCollection<IHexagon>();
+        }
+
         public void AddHexagon(double x, double y, double width, double height, int index)
         {
             Hexagons.Add(new Hexagon { X = x, Y = y, Width = width, Height = height, Index = index });

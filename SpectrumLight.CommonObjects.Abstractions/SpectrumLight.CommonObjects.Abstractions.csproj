@@ -60,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\DirectionType.cs" />
+    <Compile Include="IBaseInfrastructure.cs" />
     <Compile Include="ISpectrumLightFactory.cs" />
+    <Compile Include="Models\IApplicationModel.cs" />
     <Compile Include="Models\IArduinoCommunicator.cs" />
     <Compile Include="Models\BluetoothPort.cs">
       <SubType>Component</SubType>
