@@ -19,6 +19,21 @@ namespace SpectrumLight.CustomControls.Hexagon
             set => SetValue(LightOnOffComand, value);
         }
 
+        public static readonly DependencyProperty XProperty = DependencyProperty.Register(nameof(X), typeof(double), typeof(HexagonControl), new PropertyMetadata(0d));
+
+        public double X
+        {
+            get => (double)GetValue(XProperty);
+            set => SetValue(XProperty, value);
+        }
+        public static readonly DependencyProperty YProperty = DependencyProperty.Register(nameof(Y), typeof(double), typeof(HexagonControl), new PropertyMetadata(0d));
+
+        public double Y
+        {
+            get => (double)GetValue(YProperty);
+            set => SetValue(YProperty, value);
+        }
+
         public HexagonControl()
         {
             InitializeComponent();
