@@ -8,8 +8,6 @@ namespace SpectrumLight.CommonObjects.Abstractions
 {
     public interface IBaseInfrastructure
     {
-        ISpectrumLightFactory SpectrumLightFactory { get; }
-
-        T Resolve<T>();
+        //TODO: Add logger
     }
 }

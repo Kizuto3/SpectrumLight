@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace SpectrumLight.CustomControls.HexagonsHolder
@@ -55,13 +56,13 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             set => SetValue(LightOnOffComand, value);
         }
 
-        public static readonly DependencyProperty HexagonsProperty = DependencyProperty.Register(nameof(Hexagons), typeof(ObservableCollection<IHexagon>),
+        public static readonly DependencyProperty HexagonsProperty = DependencyProperty.Register(nameof(Hexagons), typeof(ICollection<IHexagon>),
             typeof(HexagonsHolderControl),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsArrange, new PropertyChangedCallback(HexagonsListChanged)));
 
-        public ObservableCollection<IHexagon> Hexagons
+        public ICollection<IHexagon> Hexagons
         {
-            get => (ObservableCollection<IHexagon>)GetValue(HexagonsProperty);
+            get => (ICollection<IHexagon>)GetValue(HexagonsProperty);
             set => SetValue(HexagonsProperty, value);
         }
 
@@ -90,6 +91,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
         private static void Hexagons_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e, DependencyObject d)
         {
             var control = d as HexagonsHolderControl;
+            control.InvalidateArrange();
             var list = sender as ObservableCollection<IHexagon>;
             var hexagon = list.Last();
 
@@ -101,13 +103,21 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             var x = PADDING * (1.5 * hexagon.X + 1) * SIZE + shiftX;
             var y = PADDING * (2 * hexagon.Y + hexagon.X + 0.5) * SIZE * SQRT3D2 + shiftY;
 
-            var hexagonControl = new HexagonControl() 
+            var hexagonControl = new HexagonControl()
             {
                 Width = SIZE,
                 Height = SIZE,
                 X = hexagon.X,
-                Y = hexagon.Y
+                Y = hexagon.Y,
+                Index = hexagon.Index.ToString()
             };
+
+            Binding binding = new Binding
+            {
+                Source = control,
+                Path = new PropertyPath(nameof(control.LightOnOff))
+            };
+            hexagonControl.SetBinding(HexagonControl.LightOnOffComand, binding);
             Canvas.SetLeft(hexagonControl, x);
             Canvas.SetTop(hexagonControl, y);
 

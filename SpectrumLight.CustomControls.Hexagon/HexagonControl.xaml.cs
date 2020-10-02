@@ -34,6 +34,14 @@ namespace SpectrumLight.CustomControls.Hexagon
             set => SetValue(YProperty, value);
         }
 
+        public static readonly DependencyProperty IndexProperty = DependencyProperty.Register(nameof(Index), typeof(string), typeof(HexagonControl), new PropertyMetadata("index"));
+
+        public string Index
+        {
+            get => (string)GetValue(IndexProperty);
+            set => SetValue(IndexProperty, value);
+        }
+
         public HexagonControl()
         {
             InitializeComponent();

@@ -17,7 +17,8 @@
     <!-- Invoke command when mouse enters this control -->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseEnter">
-            <i:InvokeCommandAction Command="{Binding Path=LightOnOff, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HexagonControl}}}"/>
+            <i:InvokeCommandAction Command="{Binding Path=LightOnOff, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HexagonControl}}}" 
+                                   CommandParameter="{Binding Path=Index, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HexagonControl}}}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

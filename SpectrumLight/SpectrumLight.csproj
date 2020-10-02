@@ -67,7 +67,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DependencyInjection\DiHelpers.cs" />
-    <Compile Include="SpectrumLightFactory.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

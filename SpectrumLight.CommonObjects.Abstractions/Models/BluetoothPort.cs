@@ -10,6 +10,11 @@ namespace SpectrumLight.CommonObjects.Abstractions.Models
         public DirectionType DirectionType { get; set; }
 
         public BluetoothPort(string name, string port, DirectionType directionType) =>
-            (Name, Port, DirectionType, PortName) = (name, port, directionType, port);
+            (Name, Port, DirectionType, PortName) = (name, port, directionType, name);
+
+        public override string ToString()
+        {
+            return $"{Name}, {Port}, {DirectionType}\n";
+        }
     }
 }

@@ -10,10 +10,5 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
         public ICommand MinimizeCommand { get; set; }
         public ICommand MaximizeCommand { get; set; }
         public ICommand CloseCommand { get; set; }
-
-        public void CreateSession()
-        {
-            SpectrumLightFactory.RegisterTypes();
-        }
     }
 }

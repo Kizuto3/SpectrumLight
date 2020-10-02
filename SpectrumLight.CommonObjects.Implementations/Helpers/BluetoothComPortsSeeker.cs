@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SpectrumLight.CommonObjects.Implementations.Helpers
 {
-    class BluetoothComPortsSeeker
+    public class BluetoothComPortsSeeker
     {
         public static async Task<ICollection<BluetoothPort>> GetBluetoothCOMPort()
         {
