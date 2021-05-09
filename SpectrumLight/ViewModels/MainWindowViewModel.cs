@@ -1,14 +1,10 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
-using SpectrumLight.CommonObjects.Abstractions;
 using SpectrumLight.CommonObjects.Abstractions.Enums;
 using SpectrumLight.CommonObjects.Abstractions.Models;
 using SpectrumLight.CommonObjects.Implementations.Helpers;
-using SpectrumLight.CommonObjects.Implementations.Models;
 using SpectrumLight.CommonObjects.Wpf.Abstractions;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,8 +26,6 @@ namespace SpectrumLight.ViewModels
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonContainer.Hexagons; }
         public ObservableCollection<string> Routines { get; set; }
-
-        public DelegateCommand<string> LightOnOffCommand { get; }
         public DelegateCommand AddHexagonCommand { get; }
 
         public MainWindowViewModel(IApplicationModel applicationModel, 
@@ -50,7 +44,6 @@ namespace SpectrumLight.ViewModels
             };
             FindSpectrumLightPortAndConnect();
 
-            LightOnOffCommand = new DelegateCommand<string>(LightOnOff);
             AddHexagonCommand = new DelegateCommand(AddHexagon);
         }
 
@@ -92,17 +85,13 @@ namespace SpectrumLight.ViewModels
             //TODO: you know what to do here
         }
 
-        private void LightOnOff(string index)
-        {
-            Debug.WriteLine("Still Working!");
-        }
-
         private void AddHexagon()
         {
-            HexagonContainer.AddHexagon(i, ++i, 0, 0, 0);
-            HexagonContainer.AddHexagon(i, ++i, 0, 0, 1);
-            HexagonContainer.AddHexagon(i, ++i, 0, 0, 2);
-            HexagonContainer.AddHexagon(i, ++i, 0, 0, 3);
+            var argb = new byte[] { 0xff, 0x00, 0x00, 0x00 };
+            HexagonContainer.AddHexagon(i, 0, 0, 0, i + 0, argb);
+            HexagonContainer.AddHexagon(i, 1, 0, 0, i + 1, argb);
+            HexagonContainer.AddHexagon(i, 2, 0, 0, i + 2, argb);
+            HexagonContainer.AddHexagon(i++, 3, 0, 0, i + 2, argb);
         }
 
         public void Dispose()

@@ -3,6 +3,9 @@ using Prism.Ioc;
 using System.Windows;
 using SpectrumLight.DependencyInjection;
 using Prism.Unity;
+using Prism.Mvvm;
+using SpectrumLight.CustomControls.Hexagon;
+using SpectrumLight.CustomControls.Hexagon.ViewModel;
 
 namespace SpectrumLight
 {
@@ -20,6 +23,13 @@ namespace SpectrumLight
         {
             base.RegisterRequiredTypes(containerRegistry);
             DiHelpers.RegisterApplicationTypes(containerRegistry);
+        }
+
+        protected override void ConfigureViewModelLocator()
+        {
+            base.ConfigureViewModelLocator();
+
+            ViewModelLocationProvider.Register<HexagonControl, HexagonControlViewModel>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

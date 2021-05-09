@@ -6,7 +6,7 @@
         double Y { get; set; }
         double Width { get; set; }
         double Height { get; set; }
-
+        byte[] ARGB { get; set; }
         int Index { get; set; }
     }
 }

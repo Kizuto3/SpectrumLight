@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using Prism.Commands;
+using SpectrumLight.CustomControls.Hexagon.ViewModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SpectrumLight.CustomControls.Hexagon
 {
@@ -10,15 +13,6 @@ namespace SpectrumLight.CustomControls.Hexagon
     /// </summary>
     public partial class HexagonControl : UserControl
     {
-
-        public static readonly DependencyProperty LightOnOffComand = DependencyProperty.Register(nameof(LightOnOff), typeof(ICommand), typeof(HexagonControl), new PropertyMetadata(null));
-
-        public ICommand LightOnOff
-        {
-            get => (ICommand)GetValue(LightOnOffComand);
-            set => SetValue(LightOnOffComand, value);
-        }
-
         public static readonly DependencyProperty XProperty = DependencyProperty.Register(nameof(X), typeof(double), typeof(HexagonControl), new PropertyMetadata(0d));
 
         public double X
@@ -45,6 +39,16 @@ namespace SpectrumLight.CustomControls.Hexagon
         public HexagonControl()
         {
             InitializeComponent();
+        }
+
+        public HexagonControlViewModel Model
+        {
+            get => DataContext as HexagonControlViewModel;
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Model.LightOnOff();
         }
     }
 }

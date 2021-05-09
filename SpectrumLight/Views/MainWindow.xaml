@@ -7,6 +7,7 @@
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
         xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
         Height="1000" Width="1850">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +29,6 @@
             </Grid.RowDefinitions>
 
             <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" 
-                                                  LightOnOff="{Binding LightOnOffCommand}"
                                                   Hexagons="{Binding Hexagons}">
                 <hexagonsHolder:HexagonsHolderControl.RenderTransform>
                     <RotateTransform Angle="0"/>
