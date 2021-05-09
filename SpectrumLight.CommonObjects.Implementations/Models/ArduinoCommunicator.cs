@@ -6,15 +6,10 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
 {
     public class ArduinoCommunicator : IArduinoCommunicator
     {
-        public event SerialDataReceivedEventHandler DataRecieved = (s, e) => { };
         public int BaudRate { get; } = 56700;
         public BluetoothPort ComPort { get; set; }
 
-        public ArduinoCommunicator(BluetoothPort port)
-        {
-            ComPort = port;
-            ComPort.DataReceived += DataRecieved;
-        }
+        public ArduinoCommunicator(){ }
 
         public async Task<bool> ConnectDevice()
         {
@@ -22,6 +17,12 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
             {
                 return await Task.FromResult(false);
             }
+            if (ComPort.IsOpen)
+            {
+                return await Task.FromResult(true);
+            }
+
+            ComPort.BaudRate = BaudRate;
 
             var isPortOpened = await Task.Run(() =>
             {

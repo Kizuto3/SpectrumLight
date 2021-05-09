@@ -13,16 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpectrumLight.CommonObjects.Wpf.Ui
+namespace SpectrumLight.CustomControls.HexagonsContainer
 {
-    /// <summary>
-    /// Логика взаимодействия для UserControl1.xaml
-    /// </summary>
-    public partial class UserControl1 : UserControl
+    public class HexagonsContainer : ItemsControl
     {
-        public UserControl1()
+        protected override DependencyObject GetContainerForItemOverride()
         {
-            InitializeComponent();
+            return base.GetContainerForItemOverride();
         }
     }
 }

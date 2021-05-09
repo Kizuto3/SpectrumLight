@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\BluetoothComPortsSeeker.cs" />
+    <Compile Include="Models\ApplicationModel.cs" />
     <Compile Include="Models\ArduinoCommunicator.cs" />
     <Compile Include="Models\Hexagon.cs" />
     <Compile Include="Models\HexagonsContainer.cs" />
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\SpectrumLight.CommonObjects.Abstractions\SpectrumLight.CommonObjects.Abstractions.csproj">
       <Project>{e72bd89a-bf72-4dac-9443-bac599e640a7}</Project>
       <Name>SpectrumLight.CommonObjects.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj">
+      <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
+      <Name>SpectrumLight.CommonObjects.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

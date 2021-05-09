@@ -2,24 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:SpectrumLight.CustomControls.Hexagon"
+             MouseEnter="UserControl_MouseEnter"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="HexagonStyle.xaml"/>
+                <ResourceDictionary Source="..\HexagonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-
-    <!-- Invoke command when mouse enters this control -->
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="MouseEnter">
-            <i:InvokeCommandAction Command="{Binding Path=LightOnOff, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:HexagonControl}}}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <Image Source="{StaticResource HexagonImage}"/>
     

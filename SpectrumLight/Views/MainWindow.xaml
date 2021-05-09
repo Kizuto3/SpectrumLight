@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:hexagons="clr-namespace:SpectrumLight.CustomControls.Hexagon;assembly=SpectrumLight.CustomControls.Hexagon"
+        xmlns:brightnessBar="clr-namespace:SpectrumLight.CustomControls.BrightnessBar;assembly=SpectrumLight.CustomControls.BrightnessBar"
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
+        xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="1000" Width="1850">
+        WindowStartupLocation="CenterScreen"
+        Height="1000" Width="1850">
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- Column for hexagons and stuff -->
@@ -25,7 +28,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" LightOnOff="{Binding LightOnOffCommand}">
+            <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" 
+                                                  Hexagons="{Binding Hexagons}">
                 <hexagonsHolder:HexagonsHolderControl.RenderTransform>
                     <RotateTransform Angle="0"/>
                 </hexagonsHolder:HexagonsHolderControl.RenderTransform>
@@ -48,7 +52,7 @@
                 <Button Grid.Column="0" Content="Rotate" Width="100"/>
 
                 <!-- 'OK' button -->
-                <Button Grid.Column="1" Content="OK" Width="50"/>
+                <Button Grid.Column="1" Content="OK" Width="50" Command="{Binding AddHexagonCommand}"/>
 
                 <!-- 'Cancel' button -->
                 <Button Grid.Column="2" Content="Cancel" Width="100"/>
@@ -82,6 +86,9 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
+            <brightnessBar:BrightessBarControl Grid.Row="1" SliderValue="{Binding Brightness}"/>
+
+            <routineMenu:RoutineMenuControl Grid.Row="2" RoutineList="{Binding Routines}"/>
         </Grid>
     </Grid>
 </Window>

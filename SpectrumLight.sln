@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CommonObjects
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CommonObjects.Implementations", "SpectrumLight.CommonObjects.Implementations\SpectrumLight.CommonObjects.Implementations.csproj", "{CE3C30A0-F360-4088-AE47-78625A6FA8E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CommonObjects.Wpf", "SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj", "{1C6D701D-6FC5-412A-A1DF-525999B0DB84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.BrightnessBar", "SpectrumLight.CustomControls.BrightnessBar\SpectrumLight.CustomControls.BrightnessBar.csproj", "{E8FF0066-39B2-4903-A336-6F19F98E58FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.RoutineMenu", "SpectrumLight.CustomControls.RoutineMenu\SpectrumLight.CustomControls.RoutineMenu.csproj", "{230770CD-8CDA-4C2B-857A-74B4F85EB61F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{CE3C30A0-F360-4088-AE47-78625A6FA8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE3C30A0-F360-4088-AE47-78625A6FA8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE3C30A0-F360-4088-AE47-78625A6FA8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C6D701D-6FC5-412A-A1DF-525999B0DB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6D701D-6FC5-412A-A1DF-525999B0DB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6D701D-6FC5-412A-A1DF-525999B0DB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6D701D-6FC5-412A-A1DF-525999B0DB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FF0066-39B2-4903-A336-6F19F98E58FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FF0066-39B2-4903-A336-6F19F98E58FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FF0066-39B2-4903-A336-6F19F98E58FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FF0066-39B2-4903-A336-6F19F98E58FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230770CD-8CDA-4C2B-857A-74B4F85EB61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230770CD-8CDA-4C2B-857A-74B4F85EB61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230770CD-8CDA-4C2B-857A-74B4F85EB61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230770CD-8CDA-4C2B-857A-74B4F85EB61F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +79,9 @@ Global
 		{C77DF244-5546-4988-98D6-033D9489CD80} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 		{E72BD89A-BF72-4DAC-9443-BAC599E640A7} = {8E9A4942-94A3-4C2A-A9A4-CC91BE61A09A}
 		{CE3C30A0-F360-4088-AE47-78625A6FA8E6} = {8E9A4942-94A3-4C2A-A9A4-CC91BE61A09A}
+		{1C6D701D-6FC5-412A-A1DF-525999B0DB84} = {8E9A4942-94A3-4C2A-A9A4-CC91BE61A09A}
+		{E8FF0066-39B2-4903-A336-6F19F98E58FB} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
+		{230770CD-8CDA-4C2B-857A-74B4F85EB61F} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D8214DD-5166-48CF-9667-6847A197FCEB}

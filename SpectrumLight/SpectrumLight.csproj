@@ -67,7 +67,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DependencyInjection\DiHelpers.cs" />
-    <Compile Include="SpectrumLightFactory.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -99,10 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity">
-      <Version>7.2.0.1422</Version>
+      <Version>8.0.0.1909</Version>
     </PackageReference>
     <PackageReference Include="Unity">
-      <Version>5.11.7</Version>
+      <Version>5.11.10</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +117,14 @@
       <Project>{d5ef5220-b55d-4470-99ab-7c483087ffeb}</Project>
       <Name>SpectrumLight.CommonObjects.Wpf.Ui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj">
+      <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
+      <Name>SpectrumLight.CommonObjects.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CustomControls.BrightnessBar\SpectrumLight.CustomControls.BrightnessBar.csproj">
+      <Project>{e8ff0066-39b2-4903-a336-6f19f98e58fb}</Project>
+      <Name>SpectrumLight.CustomControls.BrightnessBar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.HexagonsHolder\SpectrumLight.CustomControls.HexagonsHolder.csproj">
       <Project>{c77df244-5546-4988-98d6-033d9489cd80}</Project>
       <Name>SpectrumLight.CustomControls.HexagonsHolder</Name>
@@ -125,6 +132,10 @@
     <ProjectReference Include="..\SpectrumLight.CustomControls.Hexagon\SpectrumLight.CustomControls.Hexagon.csproj">
       <Project>{ab3085a6-0467-491f-9262-6b4fe00d9648}</Project>
       <Name>SpectrumLight.CustomControls.Hexagon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CustomControls.RoutineMenu\SpectrumLight.CustomControls.RoutineMenu.csproj">
+      <Project>{230770cd-8cda-4c2b-857a-74b4f85eb61f}</Project>
+      <Name>SpectrumLight.CustomControls.RoutineMenu</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,9 +10,14 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
     {
         public ObservableCollection<IHexagon> Hexagons { get; }
 
-        public void AddHexagon(double x, double y, double width, double height, int index)
+        public HexagonsContainer()
         {
-            Hexagons.Add(new Hexagon { X = x, Y = y, Width = width, Height = height, Index = index });
+            Hexagons = new ObservableCollection<IHexagon>();
+        }
+
+        public void AddHexagon(double x, double y, double width, double height, int index, byte[] argb)
+        {
+            Hexagons.Add(new Hexagon { X = x, Y = y, Width = width, Height = height, Index = index, ARGB = argb });
         }
 
         public void CheckHexagonsPosition()

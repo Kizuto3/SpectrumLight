@@ -83,6 +83,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Abstractions\SpectrumLight.CommonObjects.Abstractions.csproj">
+      <Project>{E72BD89A-BF72-4DAC-9443-BAC599E640A7}</Project>
+      <Name>SpectrumLight.CommonObjects.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.Hexagon\SpectrumLight.CustomControls.Hexagon.csproj">
       <Project>{ab3085a6-0467-491f-9262-6b4fe00d9648}</Project>
       <Name>SpectrumLight.CustomControls.Hexagon</Name>
