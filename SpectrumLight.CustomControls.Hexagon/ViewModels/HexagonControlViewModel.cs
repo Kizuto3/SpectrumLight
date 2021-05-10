@@ -15,6 +15,7 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
         private IHexagon _hexagon;
         private IArduinoCommunicator _communicator;
 
+        #region Public Properties
         public int Index 
         { 
             get => _hexagon.Index;
@@ -92,6 +93,7 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
                 }
             }
         }
+        #endregion
 
         public DelegateCommand LightOnOffCommand { get; private set; }
 
@@ -106,6 +108,7 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
 
         public async void LightOnOff()
         {
+            ARGB = ApplicationModel.ARGB;
             Debug.WriteLine($"X = {X}, Y = {Y}");
             if (await _communicator.ConnectDevice())
             {

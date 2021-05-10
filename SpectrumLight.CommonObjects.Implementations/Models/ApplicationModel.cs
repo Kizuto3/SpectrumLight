@@ -10,5 +10,6 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
         public ICommand MinimizeCommand { get; set; }
         public ICommand MaximizeCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public byte[] ARGB { get; set; }
     }
 }

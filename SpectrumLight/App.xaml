@@ -5,6 +5,9 @@
              xmlns:local="clr-namespace:SpectrumLight">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SpectrumLight.CommonObjects.Wpf.Ui;component/Styles/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

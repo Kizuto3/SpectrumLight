@@ -15,6 +15,7 @@ namespace SpectrumLight.CustomControls.BrightnessBar
             get => (int)GetValue(SliderValueProperty);
             set => SetValue(SliderValueProperty, value);
         }
+
         public BrightessBarControl()
         {
             InitializeComponent();

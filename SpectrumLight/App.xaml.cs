@@ -6,6 +6,7 @@ using Prism.Unity;
 using Prism.Mvvm;
 using SpectrumLight.CustomControls.Hexagon;
 using SpectrumLight.CustomControls.Hexagon.ViewModel;
+using SpectrumLight.ViewModels;
 
 namespace SpectrumLight
 {
@@ -29,6 +30,7 @@ namespace SpectrumLight
         {
             base.ConfigureViewModelLocator();
 
+            ViewModelLocationProvider.Register<MainWindow, MainViewModel>();
             ViewModelLocationProvider.Register<HexagonControl, HexagonControlViewModel>();
         }
 

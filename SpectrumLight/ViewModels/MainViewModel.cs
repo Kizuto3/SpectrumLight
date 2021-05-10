@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace SpectrumLight.ViewModels
 {
-    public class MainWindowViewModel : BaseViewModel, IDisposable
+    public class MainViewModel : BaseViewModel, IDisposable
     {
         private static int i = 0;
         private int _brighntess;
+        private byte[] _color;
+        private IArduinoCommunicator _arduinoCommunicator;
 
         public int Brightness
         {
@@ -21,19 +23,29 @@ namespace SpectrumLight.ViewModels
             set => SetProperty(ref _brighntess, value);
         }
 
-        private IArduinoCommunicator ArduinoCommunicator { get; }
+        public byte[] Color
+        {
+            get => _color;
+            set 
+            { 
+                SetProperty(ref _color, value);
+                ApplicationModel.ARGB = value;
+            }
+        }
+
         public IHexagonsContainer HexagonContainer { get; }
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonContainer.Hexagons; }
         public ObservableCollection<string> Routines { get; set; }
+
         public DelegateCommand AddHexagonCommand { get; }
 
-        public MainWindowViewModel(IApplicationModel applicationModel, 
-                                   IHexagonsContainer hexagonsContainer,
-                                   IArduinoCommunicator arduinoCommunicator) : base(applicationModel)
+        public MainViewModel(IApplicationModel applicationModel, 
+                             IHexagonsContainer hexagonsContainer,
+                             IArduinoCommunicator arduinoCommunicator) : base(applicationModel)
         {
+            _arduinoCommunicator = arduinoCommunicator;
             HexagonContainer = hexagonsContainer;
-            ArduinoCommunicator = arduinoCommunicator;
             Routines = new ObservableCollection<string>
             {
                 "Option 1",
@@ -43,6 +55,8 @@ namespace SpectrumLight.ViewModels
                 "Settings"
             };
             FindSpectrumLightPortAndConnect();
+
+            Color = new byte[] { 0xff, 0x00, 0x00, 0x00 };
 
             AddHexagonCommand = new DelegateCommand(AddHexagon);
         }
@@ -55,20 +69,20 @@ namespace SpectrumLight.ViewModels
                 BluetoothComPortsSeeker.GetBluetoothCOMPort().Wait();
                 var bluetoothPorts = BluetoothComPortsSeeker.GetBluetoothCOMPort().Result;
 
-                ArduinoCommunicator.ComPort = bluetoothPorts.Where(p => p.DirectionType == DirectionType.Outgoing && p.Port.Contains("SpectrumLight")).FirstOrDefault();
+                _arduinoCommunicator.ComPort = bluetoothPorts.Where(p => p.DirectionType == DirectionType.Outgoing && p.Port.Contains("SpectrumLight")).FirstOrDefault();
 
-                if(ArduinoCommunicator.ComPort == null)
+                if(_arduinoCommunicator.ComPort == null)
                 {
                     //TODO: do something if spectrumLight port was't found
                     return;
                 }
 
-                ArduinoCommunicator.ComPort.DataReceived += ComPort_DataReceived;
-                ArduinoCommunicator.ConnectDevice().Wait();
+                _arduinoCommunicator.ComPort.DataReceived += ComPort_DataReceived;
+                _arduinoCommunicator.ConnectDevice().Wait();
 
-                while(ArduinoCommunicator.ConnectDevice().Result != true)
+                while(_arduinoCommunicator.ConnectDevice().Result != true)
                 {
-                    ArduinoCommunicator.ConnectDevice().Wait();
+                    _arduinoCommunicator.ConnectDevice().Wait();
                     failedAttempt++;
                     if(failedAttempt >= 5)
                     {
@@ -87,16 +101,15 @@ namespace SpectrumLight.ViewModels
 
         private void AddHexagon()
         {
-            var argb = new byte[] { 0xff, 0x00, 0x00, 0x00 };
-            HexagonContainer.AddHexagon(i, 0, 0, 0, i + 0, argb);
-            HexagonContainer.AddHexagon(i, 1, 0, 0, i + 1, argb);
-            HexagonContainer.AddHexagon(i, 2, 0, 0, i + 2, argb);
-            HexagonContainer.AddHexagon(i++, 3, 0, 0, i + 2, argb);
+            HexagonContainer.AddHexagon(i, 0, 0, 0, i + 0, Color);
+            HexagonContainer.AddHexagon(i, 1, 0, 0, i + 1, Color);
+            HexagonContainer.AddHexagon(i, 2, 0, 0, i + 2, Color);
+            HexagonContainer.AddHexagon(i++, 3, 0, 0, i + 2, Color);
         }
 
         public void Dispose()
         {
-            ArduinoCommunicator.DisconnectDevice();
+            _arduinoCommunicator.DisconnectDevice();
         }
     }
 }

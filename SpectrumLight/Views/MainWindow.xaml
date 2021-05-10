@@ -6,9 +6,11 @@
         xmlns:brightnessBar="clr-namespace:SpectrumLight.CustomControls.BrightnessBar;assembly=SpectrumLight.CustomControls.BrightnessBar"
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
         xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
+        xmlns:colorPicker="clr-namespace:SpectrumLight.CustomControls.ColorPicker;assembly=SpectrumLight.CustomControls.ColorPicker"
         prism:ViewModelLocator.AutoWireViewModel="True"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1850">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- Column for hexagons and stuff -->
@@ -65,11 +67,14 @@
                 <!-- Bluetooth, Wi-fi and other stuff -->
                 <RowDefinition Height="*"/>
                 
+                <!-- Color Picker -->
+                <RowDefinition Height="5*"/>
+
                 <!-- Brightness bar -->
                 <RowDefinition Height="5*"/>
-                
+
                 <!-- Menu -->
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
             <!--  Bluetooth, Wi-fi and other stuff -->
@@ -86,9 +91,14 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
-            <brightnessBar:BrightessBarControl Grid.Row="1" SliderValue="{Binding Brightness}"/>
+            <!-- Brightness bar -->
+            <colorPicker:ColorPickerCotrol Grid.Row="1" Color="{Binding Color, Converter={StaticResource ByteArrayToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <routineMenu:RoutineMenuControl Grid.Row="2" RoutineList="{Binding Routines}"/>
+            <!-- Brightness bar -->
+            <brightnessBar:BrightessBarControl Grid.Row="2" SliderValue="{Binding Brightness}"/>
+            
+            <!-- Menu -->
+            <routineMenu:RoutineMenuControl Grid.Row="3" RoutineList="{Binding Routines}"/>
         </Grid>
     </Grid>
 </Window>
