@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.ColorPicker", "SpectrumLight.CustomControls.ColorPicker\SpectrumLight.CustomControls.ColorPicker.csproj", "{5E2A7498-10DB-450D-B52D-2223C2887432}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.TransformBars", "SpectrumLight.CustomControls.TransformBars\SpectrumLight.CustomControls.TransformBars.csproj", "{6C22816A-7E1B-49D2-9774-2BA03323B350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.Core", "SpectrumLight.Core\SpectrumLight.Core.csproj", "{640C8B73-1473-410E-A94C-EA99133B532A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{5E2A7498-10DB-450D-B52D-2223C2887432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E2A7498-10DB-450D-B52D-2223C2887432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E2A7498-10DB-450D-B52D-2223C2887432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C22816A-7E1B-49D2-9774-2BA03323B350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C22816A-7E1B-49D2-9774-2BA03323B350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C22816A-7E1B-49D2-9774-2BA03323B350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C22816A-7E1B-49D2-9774-2BA03323B350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640C8B73-1473-410E-A94C-EA99133B532A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640C8B73-1473-410E-A94C-EA99133B532A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640C8B73-1473-410E-A94C-EA99133B532A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640C8B73-1473-410E-A94C-EA99133B532A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +101,7 @@ Global
 		{E8FF0066-39B2-4903-A336-6F19F98E58FB} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 		{230770CD-8CDA-4C2B-857A-74B4F85EB61F} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 		{5E2A7498-10DB-450D-B52D-2223C2887432} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
+		{6C22816A-7E1B-49D2-9774-2BA03323B350} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D8214DD-5166-48CF-9667-6847A197FCEB}

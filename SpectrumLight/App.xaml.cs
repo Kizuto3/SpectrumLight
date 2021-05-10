@@ -1,12 +1,12 @@
 ﻿using SpectrumLight.Views;
 using Prism.Ioc;
 using System.Windows;
-using SpectrumLight.DependencyInjection;
+using SpectrumLight.Core.DependencyInjection;
 using Prism.Unity;
 using Prism.Mvvm;
 using SpectrumLight.CustomControls.Hexagon;
 using SpectrumLight.CustomControls.Hexagon.ViewModel;
-using SpectrumLight.ViewModels;
+using SpectrumLight.Core.ViewModels;
 
 namespace SpectrumLight
 {

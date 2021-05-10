@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\HexagonControlViewModel.cs" />
-    <Page Include="HexagonStyle.xaml">
+    <Page Include="Style\HexagonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

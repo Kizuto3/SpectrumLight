@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SpectrumLight.CustomControls.TransformBars">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/SpectrumLight.CommonObjects.Wpf.Ui;component/Styles/Animations.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type FrameworkElement}" x:Key="SlideInOutStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ApplicationModel.IsTransforming}" Value="True">
+                <Setter Property="Visibility" Value="Visible"/>
+
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource SlideIn}"/>
+                </DataTrigger.EnterActions>
+
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource SlideOut}"/>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding ApplicationModel.IsTransforming}" Value="Fasle">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

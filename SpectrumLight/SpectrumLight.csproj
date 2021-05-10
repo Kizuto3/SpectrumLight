@@ -66,8 +66,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DependencyInjection\DiHelpers.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -124,6 +122,10 @@
       <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
       <Name>SpectrumLight.CommonObjects.Wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.Core\SpectrumLight.Core.csproj">
+      <Project>{640c8b73-1473-410e-a94c-ea99133b532a}</Project>
+      <Name>SpectrumLight.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.BrightnessBar\SpectrumLight.CustomControls.BrightnessBar.csproj">
       <Project>{e8ff0066-39b2-4903-a336-6f19f98e58fb}</Project>
       <Name>SpectrumLight.CustomControls.BrightnessBar</Name>
@@ -143,6 +145,10 @@
     <ProjectReference Include="..\SpectrumLight.CustomControls.RoutineMenu\SpectrumLight.CustomControls.RoutineMenu.csproj">
       <Project>{230770cd-8cda-4c2b-857a-74b4f85eb61f}</Project>
       <Name>SpectrumLight.CustomControls.RoutineMenu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CustomControls.TransformBars\SpectrumLight.CustomControls.TransformBars.csproj">
+      <Project>{6c22816a-7e1b-49d2-9774-2ba03323b350}</Project>
+      <Name>SpectrumLight.CustomControls.TransformBars</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

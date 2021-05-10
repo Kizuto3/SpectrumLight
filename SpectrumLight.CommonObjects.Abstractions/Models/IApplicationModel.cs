@@ -9,5 +9,6 @@ namespace SpectrumLight.CommonObjects.Abstractions.Models
         ICommand MaximizeCommand { get; set; }
         ICommand CloseCommand { get; set; }
         byte[] ARGB { get; set; }
+        bool IsTransforming { get; set; }
     }
 }

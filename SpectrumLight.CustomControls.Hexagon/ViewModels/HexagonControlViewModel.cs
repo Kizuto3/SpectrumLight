@@ -105,6 +105,9 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
 
         public async void LightOnOff()
         {
+            if (ApplicationModel.IsTransforming)
+                return;
+
             ARGB = ApplicationModel.ARGB;
             Debug.WriteLine($"X = {X}, Y = {Y}");
             if (await _communicator.ConnectDevice())

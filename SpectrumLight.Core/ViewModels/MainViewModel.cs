@@ -8,14 +8,22 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SpectrumLight.ViewModels
+namespace SpectrumLight.Core.ViewModels
 {
     public class MainViewModel : BaseViewModel, IDisposable
     {
         private static int i = 0;
         private int _brighntess;
+        private double _storedScale;
+        private double _storedRotation;
+        private double[] _storedTranslation = new double[] { 0.0, 0.0 };
+        private double _scale;
+        private double _rotation;
+        private double[] _translation = new double[] { 0.0, 0.0};
         private byte[] _color;
         private IArduinoCommunicator _arduinoCommunicator;
+
+        #region Public Properties
 
         public int Brightness
         {
@@ -37,13 +45,47 @@ namespace SpectrumLight.ViewModels
             }
         }
 
+        public double Scale
+        {
+            get => _scale;
+            set => SetProperty(ref _scale, value);
+        }
+
+        public double Rotation
+        {
+            get => _rotation;
+            set => SetProperty(ref _rotation, value);
+        }
+
+        public double TranslateX
+        {
+            get => _translation[0];
+            set => SetProperty(ref _translation[0], value);
+        }
+
+        public double TranslateY
+        {
+            get => _translation[1];
+            set => SetProperty(ref _translation[1], value);
+        }
+
         public IHexagonsContainer HexagonContainer { get; }
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonContainer.Hexagons; }
 
         public ObservableCollection<string> Routines { get; set; }
 
+        #endregion
+
+        #region Commands
+
         public DelegateCommand AddHexagonCommand { get; }
+        public DelegateCommand StartTransformingCommand { get; }
+        public DelegateCommand CancelTransformingCommand { get; }
+
+        #endregion
+
+        #region Constructor
 
         public MainViewModel(IApplicationModel applicationModel, 
                              IHexagonsContainer hexagonsContainer,
@@ -65,9 +107,17 @@ namespace SpectrumLight.ViewModels
 
             Color = new byte[] { 0xff, 0x00, 0x00, 0x00 };
             Brightness = 255;
+            Scale = 1;
+            ApplicationModel.IsTransforming = false;
 
             AddHexagonCommand = new DelegateCommand(AddHexagon);
+            StartTransformingCommand = new DelegateCommand(StartTransforming);
+            CancelTransformingCommand = new DelegateCommand(CancelTransforming);
         }
+
+        #endregion
+
+        #region Private Methods
 
         private async void FindSpectrumLightPortAndConnect()
         {
@@ -113,6 +163,27 @@ namespace SpectrumLight.ViewModels
             HexagonContainer.AddHexagon(i, 2, 0, 0, i + 2, Color);
             HexagonContainer.AddHexagon(i++, 3, 0, 0, i + 2, Color);
         }
+
+        private void StartTransforming()
+        {
+            ApplicationModel.IsTransforming = !ApplicationModel.IsTransforming;
+
+            _storedRotation = Rotation;
+            _storedScale = Scale;
+            _storedTranslation = new double[] { TranslateX, TranslateY };
+
+            AddHexagon();
+        }
+
+        private void CancelTransforming()
+        {
+            Rotation = _storedRotation;
+            Scale = _storedScale;
+            TranslateX = _storedTranslation[0];
+            TranslateY = _storedTranslation[1];
+        }
+
+        #endregion
 
         public void Dispose()
         {

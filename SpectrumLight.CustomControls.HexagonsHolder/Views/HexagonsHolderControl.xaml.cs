@@ -1,4 +1,5 @@
 ﻿using SpectrumLight.CommonObjects.Abstractions.Models;
+using SpectrumLight.Core.ViewModels;
 using SpectrumLight.CustomControls.Hexagon;
 using SpectrumLight.CustomControls.Hexagon.ViewModel;
 using System;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SpectrumLight.CustomControls.HexagonsHolder
 {
@@ -24,8 +26,12 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
         private double _sizeCoef = 0;
         private double _shiftX = 0;
         private double _shiftY = 0;
-
+        private bool _isMoving;
+        private Point? _mouseStart;
+        private Point? _controlPosition;
         private List<HexagonControl> HexagonControls { get; set; } = new List<HexagonControl>();
+
+        #region Overrides
 
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
@@ -104,6 +110,10 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             return base.MeasureOverride(constraint);  //The panel should take all the available space...
         }
 
+        #endregion
+
+        #region Dependency Properties
+
         public static readonly DependencyProperty HexagonsProperty = DependencyProperty.Register(nameof(Hexagons), typeof(ICollection<IHexagon>),
             typeof(HexagonsHolderControl),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure, new PropertyChangedCallback(HexagonsListChanged)));
@@ -131,14 +141,9 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             }
         }
 
-        public HexagonsHolderControl()
-        {
-            InitializeComponent();
-        }
-
         private static void Hexagons_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e, DependencyObject d)
         {
-            if(e.Action == NotifyCollectionChangedAction.Add)
+            if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 var control = d as HexagonsHolderControl;
                 var list = sender as ObservableCollection<IHexagon>;
@@ -160,6 +165,15 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
                 control.InvalidateArrange();
             }
         }
+
+        #endregion
+
+        public HexagonsHolderControl()
+        {
+            InitializeComponent();
+        }
+
+        public MainViewModel Model { get => DataContext as MainViewModel; }
 
         private static HexagonControl CreateHexagonControl()
         {
@@ -211,6 +225,35 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             hexagonControl.SetBinding(HexagonControl.IndexProperty, binding);
 
             return hexagonControl;
+        }
+
+        private void UserControl_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_isMoving || !Model.ApplicationModel.IsTransforming) return;
+
+            var mousePoint = Mouse.GetPosition(this.Parent as Grid);
+
+            var offsetX = _mouseStart.Value.X - _controlPosition.Value.X - mousePoint.X;
+            var offsetY =  _mouseStart.Value.Y - _controlPosition.Value.Y - mousePoint.Y;
+
+            var translateTransform = (this.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().Single();
+            translateTransform.X = -offsetX;
+            translateTransform.Y = -offsetY;
+        }
+
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {         
+            _mouseStart = Mouse.GetPosition(this.Parent as Grid);
+
+            var translateTransform = (this.RenderTransform as TransformGroup).Children.OfType<TranslateTransform>().Single();
+            _controlPosition = new Point(translateTransform.X, translateTransform.Y);
+
+            _isMoving = true;
+        }
+
+        private void UserControl_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _isMoving = false;
         }
     }
 }

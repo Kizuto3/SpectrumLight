@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C77DF244-5546-4988-98D6-033D9489CD80}</ProjectGuid>
+    <ProjectGuid>{6C22816A-7E1B-49D2-9774-2BA03323B350}</ProjectGuid>
     <OutputType>library</OutputType>
-    <RootNamespace>SpectrumLight.CustomControls.HexagonsHolder</RootNamespace>
-    <AssemblyName>SpectrumLight.CustomControls.HexagonsHolder</AssemblyName>
+    <RootNamespace>SpectrumLight.CustomControls.TransformBars</RootNamespace>
+    <AssemblyName>SpectrumLight.CustomControls.TransformBars</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -22,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -60,12 +58,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\HexagonsHolderControl.xaml">
+    <Page Include="Style\TransformBarsStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransformBarsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Views\HexagonsHolderControl.xaml.cs">
-      <DependentUpon>HexagonsHolderControl.xaml</DependentUpon>
+    <Compile Include="Views\TransformBarsControl.xaml.cs">
+      <DependentUpon>TransformBarsControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -98,17 +100,13 @@
       <Project>{E72BD89A-BF72-4DAC-9443-BAC599E640A7}</Project>
       <Name>SpectrumLight.CommonObjects.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf.Ui\SpectrumLight.CommonObjects.Wpf.Ui.csproj">
+      <Project>{d5ef5220-b55d-4470-99ab-7c483087ffeb}</Project>
+      <Name>SpectrumLight.CommonObjects.Wpf.Ui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj">
       <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
       <Name>SpectrumLight.CommonObjects.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpectrumLight.Core\SpectrumLight.Core.csproj">
-      <Project>{640C8B73-1473-410E-A94C-EA99133B532A}</Project>
-      <Name>SpectrumLight.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpectrumLight.CustomControls.Hexagon\SpectrumLight.CustomControls.Hexagon.csproj">
-      <Project>{ab3085a6-0467-491f-9262-6b4fe00d9648}</Project>
-      <Name>SpectrumLight.CustomControls.Hexagon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

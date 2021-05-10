@@ -7,6 +7,7 @@
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
         xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
         xmlns:colorPicker="clr-namespace:SpectrumLight.CustomControls.ColorPicker;assembly=SpectrumLight.CustomControls.ColorPicker"
+        xmlns:translateBars="clr-namespace:SpectrumLight.CustomControls.TransformBars;assembly=SpectrumLight.CustomControls.TransformBars"
         prism:ViewModelLocator.AutoWireViewModel="True"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1850">
@@ -24,41 +25,31 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <!-- Hexagons -->
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
 
                 <!-- 'Rotate', 'OK', 'Cancel' buttons -->
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" 
-                                                  Hexagons="{Binding Hexagons}">
+                                                  Hexagons="{Binding Hexagons, UpdateSourceTrigger=PropertyChanged}">
                 <hexagonsHolder:HexagonsHolderControl.RenderTransform>
-                    <RotateTransform Angle="0"/>
+                    <TransformGroup>
+                        <RotateTransform Angle="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ScaleTransform ScaleX="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        ScaleY="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TranslateTransform X="{Binding TranslateX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            Y="{Binding TranslateY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TransformGroup>
                 </hexagonsHolder:HexagonsHolderControl.RenderTransform>
             </hexagonsHolder:HexagonsHolderControl>
 
             <!-- 'Rotate', 'OK', 'Cancel' buttons holder -->
-            <Grid Grid.Row="1" HorizontalAlignment="Left">
-                <Grid.ColumnDefinitions>
-                    <!-- 'Rotate' button -->
-                    <ColumnDefinition Width="Auto"/>
 
-                    <!-- 'OK' button -->
-                    <ColumnDefinition Width="Auto"/>
+            <translateBars:TransformBarsControl Grid.Row="1"
+                                                Scale="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Rotation="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <!-- 'Cancel' button -->
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- 'Rotate' button -->
-                <Button Grid.Column="0" Content="Rotate" Width="100"/>
-
-                <!-- 'OK' button -->
-                <Button Grid.Column="1" Content="OK" Width="50" Command="{Binding AddHexagonCommand}"/>
-
-                <!-- 'Cancel' button -->
-                <Button Grid.Column="2" Content="Cancel" Width="100"/>
-            </Grid>
         </Grid>
 
         <!-- Menu, brightness bar and stuff holder -->
