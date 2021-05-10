@@ -86,11 +86,8 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
             get => _hexagon.ARGB;
             set
             {
-                if (_hexagon.ARGB != value)
-                {
-                    _hexagon.ARGB = value;
-                    RaisePropertyChanged(nameof(ARGB));
-                }
+                _hexagon.ARGB = value;
+                RaisePropertyChanged(nameof(ARGB));
             }
         }
         #endregion

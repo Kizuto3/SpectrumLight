@@ -20,7 +20,11 @@ namespace SpectrumLight.ViewModels
         public int Brightness
         {
             get => _brighntess;
-            set => SetProperty(ref _brighntess, value);
+            set
+            {
+                SetProperty(ref _brighntess, value);
+                ApplicationModel.ARGB = new byte[] { Convert.ToByte(value), Color[1], Color[2], Color[3] };
+            }
         }
 
         public byte[] Color
@@ -29,13 +33,14 @@ namespace SpectrumLight.ViewModels
             set 
             { 
                 SetProperty(ref _color, value);
-                ApplicationModel.ARGB = value;
+                ApplicationModel.ARGB = new byte[] { Convert.ToByte(_brighntess),  value[1], value[2], value[3] };
             }
         }
 
         public IHexagonsContainer HexagonContainer { get; }
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonContainer.Hexagons; }
+
         public ObservableCollection<string> Routines { get; set; }
 
         public DelegateCommand AddHexagonCommand { get; }
@@ -46,6 +51,7 @@ namespace SpectrumLight.ViewModels
         {
             _arduinoCommunicator = arduinoCommunicator;
             HexagonContainer = hexagonsContainer;
+
             Routines = new ObservableCollection<string>
             {
                 "Option 1",
@@ -54,9 +60,11 @@ namespace SpectrumLight.ViewModels
                 "Option 4",
                 "Settings"
             };
+
             FindSpectrumLightPortAndConnect();
 
             Color = new byte[] { 0xff, 0x00, 0x00, 0x00 };
+            Brightness = 255;
 
             AddHexagonCommand = new DelegateCommand(AddHexagon);
         }
@@ -90,7 +98,6 @@ namespace SpectrumLight.ViewModels
                         return;
                     }
                 }
-
             });
         }
 

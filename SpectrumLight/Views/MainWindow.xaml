@@ -95,7 +95,7 @@
             <colorPicker:ColorPickerCotrol Grid.Row="1" Color="{Binding Color, Converter={StaticResource ByteArrayToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Brightness bar -->
-            <brightnessBar:BrightessBarControl Grid.Row="2" SliderValue="{Binding Brightness}"/>
+            <brightnessBar:BrightessBarControl Grid.Row="2" SliderValue="{Binding Brightness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Menu -->
             <routineMenu:RoutineMenuControl Grid.Row="3" RoutineList="{Binding Routines}"/>

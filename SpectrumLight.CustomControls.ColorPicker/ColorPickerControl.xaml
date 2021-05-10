@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ext:ColorPicker SelectedColor="{Binding Color, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ColorPickerCotrol}}}"
+                         UsingAlphaChannel="False" ShowStandardColors="False"
                          ToolTip="Pick a color for hexagons"/>
     </Grid>
 </UserControl>

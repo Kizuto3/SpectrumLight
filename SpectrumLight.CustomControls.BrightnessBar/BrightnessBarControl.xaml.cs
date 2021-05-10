@@ -8,7 +8,7 @@ namespace SpectrumLight.CustomControls.BrightnessBar
     /// </summary>
     public partial class BrightessBarControl : UserControl
     {
-        public static readonly DependencyProperty SliderValueProperty = DependencyProperty.Register(nameof(SliderValue), typeof(int), typeof(BrightessBarControl), new PropertyMetadata(0));
+        public static readonly DependencyProperty SliderValueProperty = DependencyProperty.Register(nameof(SliderValue), typeof(int), typeof(BrightessBarControl), new PropertyMetadata(255));
 
         public int SliderValue
         {
