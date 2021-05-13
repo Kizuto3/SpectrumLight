@@ -1,24 +1,43 @@
-﻿using SpectrumLight.CommonObjects.Abstractions.Models;
+﻿using Prism.Mvvm;
+using SpectrumLight.CommonObjects.Abstractions.Models;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
 
 namespace SpectrumLight.CommonObjects.Implementations.Models
 {
-    public class ArduinoCommunicator : IArduinoCommunicator
+    public class ArduinoCommunicator : BindableBase, IArduinoCommunicator
     {
+        public bool IsConnected
+        {
+            get => ComPort != null && ComPort.IsOpen;
+        }
+
+        public string ConnectionName
+        {
+            get => ComPort == null ? "Disconected" : ComPort.Name;
+        }
+
         public int BaudRate { get; } = 56700;
+
         public BluetoothPort ComPort { get; set; }
 
-        public ArduinoCommunicator(){ }
+        public ArduinoCommunicator() { }
 
         public async Task<bool> ConnectDevice()
         {
             if (ComPort == null)
             {
+                RaisePropertyChanged(nameof(IsConnected));
+                RaisePropertyChanged(nameof(ConnectionName));
+
                 return await Task.FromResult(false);
             }
             if (ComPort.IsOpen)
             {
+                RaisePropertyChanged(nameof(IsConnected));
+                RaisePropertyChanged(nameof(ConnectionName));
+
                 return await Task.FromResult(true);
             }
 
@@ -29,10 +48,16 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
                 try
                 {
                     ComPort.Open();
+                    RaisePropertyChanged(nameof(IsConnected));
+                    RaisePropertyChanged(nameof(ConnectionName));
+
                     return true;
                 }
                 catch (System.IO.IOException)
                 {
+                    RaisePropertyChanged(nameof(IsConnected));
+                    RaisePropertyChanged(nameof(ConnectionName));
+
                     return false;
                 }
             });
@@ -44,12 +69,18 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
         {
             if (ComPort != null)
             {
+                RaisePropertyChanged(nameof(IsConnected));
+                RaisePropertyChanged(nameof(ConnectionName));
+
                 ComPort.Close();
             }
         }
 
         public bool SendData(string data)
         {
+            RaisePropertyChanged(nameof(IsConnected));
+            RaisePropertyChanged(nameof(ConnectionName));
+
             if (!ComPort.IsOpen)
             {
                 return false;
@@ -61,6 +92,9 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
 
         public bool SendData(byte[] data)
         {
+            RaisePropertyChanged(nameof(IsConnected));
+            RaisePropertyChanged(nameof(ConnectionName));
+
             if (!ComPort.IsOpen)
             {
                 return false;

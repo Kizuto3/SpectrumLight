@@ -8,6 +8,7 @@
         xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
         xmlns:colorPicker="clr-namespace:SpectrumLight.CustomControls.ColorPicker;assembly=SpectrumLight.CustomControls.ColorPicker"
         xmlns:translateBars="clr-namespace:SpectrumLight.CustomControls.TransformBars;assembly=SpectrumLight.CustomControls.TransformBars"
+        xmlns:connectionBars="clr-namespace:SpectrumLight.CustomControls.ConnectionsBar;assembly=SpectrumLight.CustomControls.ConnectionsBar"
         prism:ViewModelLocator.AutoWireViewModel="True"
         WindowStartupLocation="CenterScreen"
         Height="1000" Width="1850">
@@ -59,30 +60,19 @@
                 <RowDefinition Height="*"/>
                 
                 <!-- Color Picker -->
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
 
                 <!-- Brightness bar -->
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
 
                 <!-- Menu -->
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
             <!--  Bluetooth, Wi-fi and other stuff -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <!-- Bluetooth -->
-                    <ColumnDefinition Width="*"/>
-                    
-                    <!-- Wi-fi -->
-                    <ColumnDefinition Width="*"/>
-                    
-                    <!-- Errors -->
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <connectionBars:ConnectionsBarControl Grid.Row="0"/>
 
-            <!-- Brightness bar -->
+            <!-- Color picker -->
             <colorPicker:ColorPickerCotrol Grid.Row="1" Color="{Binding Color, Converter={StaticResource ByteArrayToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Brightness bar -->

@@ -7,6 +7,8 @@ using Prism.Mvvm;
 using SpectrumLight.CustomControls.Hexagon;
 using SpectrumLight.CustomControls.Hexagon.ViewModel;
 using SpectrumLight.Core.ViewModels;
+using SpectrumLight.CustomControls.ConnectionsBar;
+using SpectrumLight.CustomControls.ConnectionsBar.ViewModel;
 
 namespace SpectrumLight
 {
@@ -32,6 +34,7 @@ namespace SpectrumLight
 
             ViewModelLocationProvider.Register<MainWindow, MainViewModel>();
             ViewModelLocationProvider.Register<HexagonControl, HexagonControlViewModel>();
+            ViewModelLocationProvider.Register<ConnectionsBarControl, ConnectionsBarControlViewModel>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

@@ -16,6 +16,7 @@ namespace SpectrumLight.Core.DependencyInjection
             container.RegisterSingleton<IArduinoCommunicator, ArduinoCommunicator>();
             container.RegisterType<IHexagon, Hexagon>();
             container.RegisterType<IHexagonsContainer, HexagonsContainer>();
+            container.RegisterType<IWiFiConnectionManager, WiFiConnectionManager>();
         }
     }
 }

@@ -134,6 +134,10 @@
       <Project>{5e2a7498-10db-450d-b52d-2223c2887432}</Project>
       <Name>SpectrumLight.CustomControls.ColorPicker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CustomControls.ConnectionsBar\SpectrumLight.CustomControls.ConnectionsBar.csproj">
+      <Project>{AE510314-00F8-40D4-BA8A-121E1C666A89}</Project>
+      <Name>SpectrumLight.CustomControls.ConnectionsBar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.HexagonsHolder\SpectrumLight.CustomControls.HexagonsHolder.csproj">
       <Project>{c77df244-5546-4988-98d6-033d9489cd80}</Project>
       <Name>SpectrumLight.CustomControls.HexagonsHolder</Name>

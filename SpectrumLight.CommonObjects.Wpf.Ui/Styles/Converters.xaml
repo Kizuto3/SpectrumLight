@@ -4,5 +4,6 @@
 
     <converters:ByteArrayToBrushConverter x:Key="ByteArrayToBrushConverter"/>
     <converters:ByteArrayToColorConverter x:Key="ByteArrayToColorConverter"/>
+    <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
 
 </ResourceDictionary>

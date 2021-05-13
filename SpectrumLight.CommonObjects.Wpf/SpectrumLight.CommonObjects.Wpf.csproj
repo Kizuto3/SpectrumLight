@@ -63,6 +63,7 @@
     <Compile Include="Abstractions\BaseValueConverter.cs" />
     <Compile Include="Abstractions\BaseViewModel.cs" />
     <Compile Include="Converters\ByteArrayToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\ByteArrayToColorConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
