@@ -6,6 +6,7 @@
         xmlns:brightnessBar="clr-namespace:SpectrumLight.CustomControls.BrightnessBar;assembly=SpectrumLight.CustomControls.BrightnessBar"
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
         xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
+        xmlns:menuSettings="clr-namespace:SpectrumLight.CustomControls.MenuSettings;assembly=SpectrumLight.CustomControls.MenuSettings"
         xmlns:colorPicker="clr-namespace:SpectrumLight.CustomControls.ColorPicker;assembly=SpectrumLight.CustomControls.ColorPicker"
         xmlns:translateBars="clr-namespace:SpectrumLight.CustomControls.TransformBars;assembly=SpectrumLight.CustomControls.TransformBars"
         xmlns:connectionBars="clr-namespace:SpectrumLight.CustomControls.ConnectionsBar;assembly=SpectrumLight.CustomControls.ConnectionsBar"
@@ -16,7 +17,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <!-- Column for hexagons and stuff -->
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
             
             <!-- Column for menu, brightness bar and other-->
             <ColumnDefinition Width="*"/>
@@ -32,13 +33,16 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" 
-                                                  Hexagons="{Binding Hexagons, UpdateSourceTrigger=PropertyChanged}">
+            <hexagonsHolder:HexagonsHolderControl RenderTransformOrigin="0.5 0.5" Grid.Row="0" x:Name="HexagonsHolder"
+                                                  Hexagons="{Binding Hexagons, UpdateSourceTrigger=PropertyChanged}"
+                                                  Scale="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Rotation="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  IsApplyColor="{Binding IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <hexagonsHolder:HexagonsHolderControl.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ScaleTransform ScaleX="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                        ScaleY="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <RotateTransform Angle="{Binding ElementName=TransformBars, Path=Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ScaleTransform ScaleX="{Binding ElementName=TransformBars, Path=Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        ScaleY="{Binding ElementName=TransformBars, Path=Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TranslateTransform X="{Binding TranslateX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                             Y="{Binding TranslateY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </TransformGroup>
@@ -46,10 +50,9 @@
             </hexagonsHolder:HexagonsHolderControl>
 
             <!-- 'Rotate', 'OK', 'Cancel' buttons holder -->
-
-            <translateBars:TransformBarsControl Grid.Row="1"
-                                                Scale="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Rotation="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <translateBars:TransformBarsControl Grid.Row="1" x:Name="TransformBars"
+                                                Scale="{Binding ElementName=HexagonsHolder, Path=Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Rotation="{Binding ElementName=HexagonsHolder, Path=Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         </Grid>
 
@@ -67,6 +70,9 @@
 
                 <!-- Menu -->
                 <RowDefinition Height="10*"/>
+                
+                <!-- Show routines button -->
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <!--  Bluetooth, Wi-fi and other stuff -->
@@ -79,7 +85,9 @@
             <brightnessBar:BrightessBarControl Grid.Row="2" SliderValue="{Binding Brightness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!-- Menu -->
-            <routineMenu:RoutineMenuControl Grid.Row="3" RoutineList="{Binding Routines}"/>
+            <menuSettings:MenuSettingsControl Grid.Row="3" IsApplyColor="{Binding ElementName=HexagonsHolder, Path=IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Grid.Row="4" Content="Click me =D"/>
         </Grid>
     </Grid>
 </Window>

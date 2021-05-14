@@ -4,11 +4,11 @@ using System.Windows;
 using SpectrumLight.Core.DependencyInjection;
 using Prism.Unity;
 using Prism.Mvvm;
-using SpectrumLight.CustomControls.Hexagon;
-using SpectrumLight.CustomControls.Hexagon.ViewModel;
 using SpectrumLight.Core.ViewModels;
 using SpectrumLight.CustomControls.ConnectionsBar;
 using SpectrumLight.CustomControls.ConnectionsBar.ViewModel;
+using SpectrumLight.CustomControls.HexagonsHolder;
+using SpectrumLight.CustomControls.HexagonsHolder.ViewModels;
 
 namespace SpectrumLight
 {
@@ -33,7 +33,7 @@ namespace SpectrumLight
             base.ConfigureViewModelLocator();
 
             ViewModelLocationProvider.Register<MainWindow, MainViewModel>();
-            ViewModelLocationProvider.Register<HexagonControl, HexagonControlViewModel>();
+            ViewModelLocationProvider.Register<HexagonsHolderControl, HexagonsHolderControlViewModel>();
             ViewModelLocationProvider.Register<ConnectionsBarControl, ConnectionsBarControlViewModel>();
         }
 

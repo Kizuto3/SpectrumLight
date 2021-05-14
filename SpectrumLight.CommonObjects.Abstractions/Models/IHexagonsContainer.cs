@@ -7,6 +7,6 @@ namespace SpectrumLight.CommonObjects.Abstractions.Models
         ObservableCollection<IHexagon> Hexagons { get; }
         void AddHexagon(double x, double y, double width, double height, int index, byte[] argb);
         void RemoveHexagon(int index);
-        void CheckHexagonsPosition();
+        void ApplyColor(byte[] argb);
     }
 }

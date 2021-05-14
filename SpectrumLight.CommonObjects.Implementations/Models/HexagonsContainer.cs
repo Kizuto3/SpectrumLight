@@ -20,9 +20,12 @@ namespace SpectrumLight.CommonObjects.Implementations.Models
             Hexagons.Add(new Hexagon { X = x, Y = y, Width = width, Height = height, Index = index, ARGB = argb });
         }
 
-        public void CheckHexagonsPosition()
+        public void ApplyColor(byte[] argb)
         {
-            throw new NotImplementedException();
+            foreach(var hexagon in Hexagons)
+            {
+                hexagon.ARGB = argb;
+            }
         }
 
         public void RemoveHexagon(int index)

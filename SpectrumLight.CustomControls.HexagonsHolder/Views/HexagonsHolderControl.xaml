@@ -11,6 +11,7 @@
              PreviewMouseMove="UserControl_PreviewMouseMove"
              PreviewMouseDown="UserControl_PreviewMouseDown"
              PreviewMouseUp="UserControl_PreviewMouseUp"
+             Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Canvas x:Name="Holder"/>

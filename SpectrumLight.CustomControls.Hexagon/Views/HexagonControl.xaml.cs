@@ -20,6 +20,7 @@ namespace SpectrumLight.CustomControls.Hexagon
             get => (double)GetValue(XProperty);
             set => SetValue(XProperty, value);
         }
+
         public static readonly DependencyProperty YProperty = DependencyProperty.Register(nameof(Y), typeof(double), typeof(HexagonControl), new PropertyMetadata(0d));
 
         public double Y

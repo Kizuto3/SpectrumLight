@@ -146,6 +146,10 @@
       <Project>{ab3085a6-0467-491f-9262-6b4fe00d9648}</Project>
       <Name>SpectrumLight.CustomControls.Hexagon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CustomControls.MenuSettings\SpectrumLight.CustomControls.MenuSettings.csproj">
+      <Project>{0540ef83-1f8c-4bb9-9372-13b4dfa9408d}</Project>
+      <Name>SpectrumLight.CustomControls.MenuSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.RoutineMenu\SpectrumLight.CustomControls.RoutineMenu.csproj">
       <Project>{230770cd-8cda-4c2b-857a-74b4f85eb61f}</Project>
       <Name>SpectrumLight.CustomControls.RoutineMenu</Name>

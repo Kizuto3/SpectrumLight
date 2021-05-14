@@ -2,6 +2,7 @@
 using SpectrumLight.Core.ViewModels;
 using SpectrumLight.CustomControls.Hexagon;
 using SpectrumLight.CustomControls.Hexagon.ViewModel;
+using SpectrumLight.CustomControls.HexagonsHolder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,11 +17,11 @@ using System.Windows.Media;
 namespace SpectrumLight.CustomControls.HexagonsHolder
 {
     /// <summary>
-    /// Логика взаимодействия для UserControl1.xaml
+    /// Логика взаимодействия для HexagonsHolderControl.xaml
     /// </summary>
     public partial class HexagonsHolderControl : UserControl
     {
-        private static double SIZE = 100;
+        private static double SIZE = 70;
         private static double SQRT3D2 = Math.Sqrt(3) / 2.0;
         private static double PADDING = 0.53;
         private double _sizeCoef = 0;
@@ -126,14 +127,6 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
         private static void HexagonsListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as HexagonsHolderControl;
-
-            if(e.OldValue != null)
-            {
-                var coll = e.OldValue as INotifyCollectionChanged;
-                coll.CollectionChanged -= (s, e) => Hexagons_CollectionChanged(s, e, d);
-            }
-
             if(e.NewValue != null)
             {
                 var coll = e.NewValue as ObservableCollection<IHexagon>;
@@ -149,21 +142,34 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
                 var list = sender as ObservableCollection<IHexagon>;
                 var hexagon = list.Last();
 
-                var hexagonControl = CreateHexagonControl();
+                var hexagonControl = CreateHexagonControl(control.Model, hexagon);
 
-                hexagonControl.Width = SIZE;
-                hexagonControl.Height = SIZE;
-                hexagonControl.X = hexagon.X;
-                hexagonControl.Y = hexagon.Y;
-                hexagonControl.Index = hexagon.Index.ToString();
-                hexagonControl.Model.ARGB = hexagon.ARGB;
-
-                control.HexagonControls.Add(hexagonControl);
-                control.Holder.Children.Add(hexagonControl);
-
-                control.InvalidateMeasure();
-                control.InvalidateArrange();
+                PlaceHexagonControl(hexagonControl, control, hexagon);
             }
+        }
+
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(HexagonsHolderControl), new PropertyMetadata(0d));
+
+        public double Scale
+        {
+            get => (double)GetValue(ScaleProperty);
+            set => SetValue(ScaleProperty, value);
+        }
+
+        public static readonly DependencyProperty RotationProperty = DependencyProperty.Register(nameof(Rotation), typeof(double), typeof(HexagonsHolderControl), new PropertyMetadata(0d));
+
+        public double Rotation
+        {
+            get => (double)GetValue(RotationProperty);
+            set => SetValue(RotationProperty, value);
+        }
+
+        public static readonly DependencyProperty IsApplyColorProperty = DependencyProperty.Register(nameof(IsApplyColor), typeof(bool), typeof(HexagonsHolderControl), new PropertyMetadata(false));
+
+        public bool IsApplyColor
+        {
+            get => (bool)GetValue(IsApplyColorProperty);
+            set => SetValue(IsApplyColorProperty, value);
         }
 
         #endregion
@@ -173,34 +179,21 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             InitializeComponent();
         }
 
-        public MainViewModel Model { get => DataContext as MainViewModel; }
+        public HexagonsHolderControlViewModel Model { get => DataContext as HexagonsHolderControlViewModel; }
 
-        private static HexagonControl CreateHexagonControl()
+        #region Creating and placing a hexagon control
+
+        private static HexagonControl CreateHexagonControl(HexagonsHolderControlViewModel mainViewModel, IHexagon hexagon)
         {
-            var hexagonControl = new HexagonControl();
+            var hexagonControl = new HexagonControl
+            {
+                DataContext = new HexagonControlViewModel(mainViewModel.ApplicationModel, mainViewModel.ArduinoCommunicator, hexagon)
+            };
 
             Binding binding = new Binding
             {
-                Source = hexagonControl.Model,
-                Path = new PropertyPath(nameof(hexagonControl.Model.Width)),
-                Mode = BindingMode.TwoWay
-            };
-
-            hexagonControl.SetBinding(HexagonControl.WidthProperty, binding);
-
-            binding = new Binding
-            {
-                Source = hexagonControl.Model,
-                Path = new PropertyPath(nameof(hexagonControl.Model.Height)),
-                Mode = BindingMode.TwoWay
-            };
-
-            hexagonControl.SetBinding(HexagonControl.HeightProperty, binding);
-
-            binding = new Binding
-            {
-                Source = hexagonControl.Model,
-                Path = new PropertyPath(nameof(hexagonControl.Model.X)),
+                Source = hexagonControl.Model.Hexagon,
+                Path = new PropertyPath(nameof(hexagonControl.Model.Hexagon.X)),
                 Mode = BindingMode.TwoWay
             };
 
@@ -208,8 +201,8 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
             binding = new Binding
             {
-                Source = hexagonControl.Model,
-                Path = new PropertyPath(nameof(hexagonControl.Model.Y)),
+                Source = hexagonControl.Model.Hexagon,
+                Path = new PropertyPath(nameof(hexagonControl.Model.Hexagon.Y)),
                 Mode = BindingMode.TwoWay
             };
 
@@ -217,8 +210,8 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
             binding = new Binding
             {
-                Source = hexagonControl.Model,
-                Path = new PropertyPath(nameof(hexagonControl.Model.Index)),
+                Source = hexagonControl.Model.Hexagon,
+                Path = new PropertyPath(nameof(hexagonControl.Model.Hexagon.Index)),
                 Mode = BindingMode.TwoWay
             };
 
@@ -226,6 +219,26 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
             return hexagonControl;
         }
+
+        private static void PlaceHexagonControl(HexagonControl hexagonControl, HexagonsHolderControl holder, IHexagon hexagon)
+        {
+            hexagonControl.Width = SIZE;
+            hexagonControl.Height = SIZE;
+            hexagonControl.X = hexagon.X;
+            hexagonControl.Y = hexagon.Y;
+            hexagonControl.Index = hexagon.Index.ToString();
+            hexagonControl.Model.Hexagon.ARGB = hexagon.ARGB;
+
+            holder.HexagonControls.Add(hexagonControl);
+            holder.Holder.Children.Add(hexagonControl);
+
+            holder.InvalidateMeasure();
+            holder.InvalidateArrange();
+        }
+
+        #endregion
+
+        #region Drag
 
         private void UserControl_PreviewMouseMove(object sender, MouseEventArgs e)
         {
@@ -254,6 +267,18 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
         private void UserControl_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             _isMoving = false;
+        }
+
+        #endregion
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach(var hexagon in Hexagons)
+            {
+                var hexagonControl = CreateHexagonControl(Model, hexagon);
+
+                PlaceHexagonControl(hexagonControl, this, hexagon);
+            }
         }
     }
 }
