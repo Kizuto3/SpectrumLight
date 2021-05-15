@@ -21,6 +21,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
     /// </summary>
     public partial class HexagonsHolderControl : UserControl
     {
+        private static NotifyCollectionChangedEventHandler CollectionChangedEventHandler;
         private static double SIZE = 70;
         private static double SQRT3D2 = Math.Sqrt(3) / 2.0;
         private static double PADDING = 0.53;
@@ -127,10 +128,24 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
         private static void HexagonsListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (CollectionChangedEventHandler == null)
+            {
+                CollectionChangedEventHandler = new NotifyCollectionChangedEventHandler((sender, e) =>
+                {
+                    Hexagons_CollectionChanged(sender, e, d);
+                });
+            }
+
+            if (e.OldValue != null)
+            {
+                var coll = e.OldValue as ObservableCollection<IHexagon>;
+                coll.CollectionChanged -= CollectionChangedEventHandler;
+            }
+
             if(e.NewValue != null)
             {
                 var coll = e.NewValue as ObservableCollection<IHexagon>;
-                coll.CollectionChanged += (s, e) => Hexagons_CollectionChanged(s, e, d);
+                coll.CollectionChanged += CollectionChangedEventHandler;
             }
         }
 
