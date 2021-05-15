@@ -1,4 +1,5 @@
-﻿using SpectrumLight.CommonObjects.Abstractions.Enums;
+﻿using Prism.Commands;
+using SpectrumLight.CommonObjects.Abstractions.Enums;
 using SpectrumLight.CommonObjects.Abstractions.Models;
 using SpectrumLight.CommonObjects.Implementations.Helpers;
 using SpectrumLight.CommonObjects.Wpf.Abstractions;
@@ -67,6 +68,13 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonsContainer.Hexagons; }
 
+        public DelegateCommand StartTransformingCommand { get; }
+
+        public DelegateCommand FinishTransformingCommand { get; }
+
+        public DelegateCommand CancelTransformingCommand { get; }
+
+
         public HexagonsHolderControlViewModel(IApplicationModel applicationModel,
                                               IHexagonsContainer hexagonContainer,
                                               IArduinoCommunicator arduinoCommunicator) : base(applicationModel)
@@ -75,9 +83,13 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
             HexagonsContainer = hexagonContainer;
             ArduinoCommunicator = arduinoCommunicator;
 
+            FindSpectrumLightPortAndConnect();
+
             Scale = 1;
 
-            FindSpectrumLightPortAndConnect();
+            StartTransformingCommand = new DelegateCommand(StartTransforming);
+            FinishTransformingCommand = new DelegateCommand(FinishTransforming);
+            CancelTransformingCommand = new DelegateCommand(CancelTrasforming);
 
             AddHexagon();
             AddHexagon();
@@ -120,6 +132,30 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
         private void ComPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             //TODO: you know what to do here
+        }
+
+        private void StartTransforming()
+        {
+            ApplicationModel.IsTransforming = !ApplicationModel.IsTransforming;
+
+            AddHexagon();
+
+            _storedScale = Scale;
+            _storedRotation = Rotation;
+            _storedTranslation = new double[] { TranslateX, TranslateY };
+        }
+
+        private void FinishTransforming()
+        {
+            ApplicationModel.IsTransforming = !ApplicationModel.IsTransforming;
+        }
+
+        private void CancelTrasforming()
+        {
+            Scale = _storedScale;
+            Rotation = _storedRotation;
+            TranslateX = _storedTranslation[0];
+            TranslateY = _storedTranslation[1];
         }
 
         private void AddHexagon()

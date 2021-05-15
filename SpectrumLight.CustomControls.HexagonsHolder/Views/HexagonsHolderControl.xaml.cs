@@ -187,6 +187,30 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             set => SetValue(IsApplyColorProperty, value);
         }
 
+        public static readonly DependencyProperty StartTransformingProperty = DependencyProperty.Register(nameof(StartTransforming), typeof(ICommand), typeof(HexagonsHolderControl), new PropertyMetadata(null));
+
+        public ICommand StartTransforming
+        {
+            get => (ICommand)GetValue(StartTransformingProperty);
+            set => SetValue(StartTransformingProperty, value);
+        }
+
+        public static readonly DependencyProperty FinishTransformingProperty = DependencyProperty.Register(nameof(FinishTransforming), typeof(ICommand), typeof(HexagonsHolderControl), new PropertyMetadata(null));
+
+        public ICommand FinishTransforming
+        {
+            get => (ICommand)GetValue(FinishTransformingProperty);
+            set => SetValue(FinishTransformingProperty, value);
+        }
+
+        public static readonly DependencyProperty CancelTransformingProperty = DependencyProperty.Register(nameof(CancelTransforming), typeof(ICommand), typeof(HexagonsHolderControl), new PropertyMetadata(null));
+
+        public ICommand CancelTransforming
+        {
+            get => (ICommand)GetValue(CancelTransformingProperty);
+            set => SetValue(CancelTransformingProperty, value);
+        }
+
         #endregion
 
         public HexagonsHolderControl()
@@ -288,6 +312,9 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Hexagons == null)
+                return;
+
             foreach(var hexagon in Hexagons)
             {
                 var hexagonControl = CreateHexagonControl(Model, hexagon);

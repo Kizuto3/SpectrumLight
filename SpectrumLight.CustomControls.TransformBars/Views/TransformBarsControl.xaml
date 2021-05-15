@@ -21,13 +21,18 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0"
-                Command="{Binding StartTransformingCommand}" Content="Transform"/>
+                Command="{Binding StartTransforming, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TransformBarsControl}}}" 
+                Content="Transform"/>
         
         <Button Grid.Column="1"  Style="{StaticResource SlideInOutStyle}" Height="0"
-                Command="{Binding StartTransformingCommand}" Content="OK"/>
+                Command="{Binding FinishTransforming, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TransformBarsControl}}}" 
+                Content="OK"
+                Margin="5, 0, 0 ,0"/>
 
         <Button Grid.Column="2" Style="{StaticResource SlideInOutStyle}" Height="0"
-                Command="{Binding CancelTransformingCommand}" Content="Cancel"/>
+                Command="{Binding CancelTransforming, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TransformBarsControl}}}" 
+                Content="Cancel"
+                Margin="5, 0, 0 ,0"/>
 
         <Slider Grid.Column="3" Minimum="0" Maximum="2" IsMoveToPointEnabled="True" Height="0"
                 VerticalAlignment="Center" Style="{StaticResource SlideInOutStyle}" ToolTip="Change the scale of the hexagons"

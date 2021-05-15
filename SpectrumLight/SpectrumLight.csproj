@@ -150,10 +150,6 @@
       <Project>{0540ef83-1f8c-4bb9-9372-13b4dfa9408d}</Project>
       <Name>SpectrumLight.CustomControls.MenuSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpectrumLight.CustomControls.RoutineMenu\SpectrumLight.CustomControls.RoutineMenu.csproj">
-      <Project>{230770cd-8cda-4c2b-857a-74b4f85eb61f}</Project>
-      <Name>SpectrumLight.CustomControls.RoutineMenu</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CustomControls.TransformBars\SpectrumLight.CustomControls.TransformBars.csproj">
       <Project>{6c22816a-7e1b-49d2-9774-2ba03323b350}</Project>
       <Name>SpectrumLight.CustomControls.TransformBars</Name>

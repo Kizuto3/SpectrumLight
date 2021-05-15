@@ -1,13 +1,6 @@
-﻿using Prism.Commands;
-using SpectrumLight.CommonObjects.Abstractions.Enums;
-using SpectrumLight.CommonObjects.Abstractions.Models;
-using SpectrumLight.CommonObjects.Implementations.Helpers;
-using SpectrumLight.CommonObjects.Implementations.Models;
+﻿using SpectrumLight.CommonObjects.Abstractions.Models;
 using SpectrumLight.CommonObjects.Wpf.Abstractions;
 using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SpectrumLight.Core.ViewModels
 {
@@ -42,16 +35,6 @@ namespace SpectrumLight.Core.ViewModels
 
         #endregion
 
-        #region Commands
-
-        public DelegateCommand AddHexagonCommand { get; }
-
-        public DelegateCommand StartTransformingCommand { get; }
-
-        public DelegateCommand CancelTransformingCommand { get; }
-
-        #endregion
-
         #region Constructor
 
         public MainViewModel(IApplicationModel applicationModel, 
@@ -62,22 +45,6 @@ namespace SpectrumLight.Core.ViewModels
             Color = new byte[] { 0xff, 0x00, 0x00, 0x00 };
             Brightness = 255;
             ApplicationModel.IsTransforming = false;
-
-            StartTransformingCommand = new DelegateCommand(StartTransforming);
-            CancelTransformingCommand = new DelegateCommand(CancelTransforming);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void StartTransforming()
-        {
-            ApplicationModel.IsTransforming = !ApplicationModel.IsTransforming;
-        }
-
-        private void CancelTransforming()
-        {
         }
 
         #endregion

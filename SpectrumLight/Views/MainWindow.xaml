@@ -5,7 +5,6 @@
         xmlns:hexagons="clr-namespace:SpectrumLight.CustomControls.Hexagon;assembly=SpectrumLight.CustomControls.Hexagon"
         xmlns:brightnessBar="clr-namespace:SpectrumLight.CustomControls.BrightnessBar;assembly=SpectrumLight.CustomControls.BrightnessBar"
         xmlns:hexagonsHolder="clr-namespace:SpectrumLight.CustomControls.HexagonsHolder;assembly=SpectrumLight.CustomControls.HexagonsHolder"
-        xmlns:routineMenu="clr-namespace:SpectrumLight.CustomControls.RoutineMenu;assembly=SpectrumLight.CustomControls.RoutineMenu"
         xmlns:menuSettings="clr-namespace:SpectrumLight.CustomControls.MenuSettings;assembly=SpectrumLight.CustomControls.MenuSettings"
         xmlns:colorPicker="clr-namespace:SpectrumLight.CustomControls.ColorPicker;assembly=SpectrumLight.CustomControls.ColorPicker"
         xmlns:translateBars="clr-namespace:SpectrumLight.CustomControls.TransformBars;assembly=SpectrumLight.CustomControls.TransformBars"
@@ -37,7 +36,10 @@
                                                   Hexagons="{Binding Hexagons, UpdateSourceTrigger=PropertyChanged}"
                                                   Scale="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   Rotation="{Binding Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                  IsApplyColor="{Binding IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                  IsApplyColor="{Binding IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  StartTransforming="{Binding StartTransformingCommand, UpdateSourceTrigger=PropertyChanged}"
+                                                  FinishTransforming="{Binding FinishTransformingCommand, UpdateSourceTrigger=PropertyChanged}"
+                                                  CancelTransforming="{Binding CancelTransformingCommand, UpdateSourceTrigger=PropertyChanged}">
                 <hexagonsHolder:HexagonsHolderControl.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="{Binding ElementName=TransformBars, Path=Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -52,7 +54,10 @@
             <!-- 'Rotate', 'OK', 'Cancel' buttons holder -->
             <translateBars:TransformBarsControl Grid.Row="1" x:Name="TransformBars"
                                                 Scale="{Binding ElementName=HexagonsHolder, Path=Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Rotation="{Binding ElementName=HexagonsHolder, Path=Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                                Rotation="{Binding ElementName=HexagonsHolder, Path=Rotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                StartTransforming="{Binding ElementName=HexagonsHolder, Path=StartTransforming, UpdateSourceTrigger=PropertyChanged}"
+                                                FinishTransforming="{Binding ElementName=HexagonsHolder, Path=FinishTransforming, UpdateSourceTrigger=PropertyChanged}"
+                                                CancelTransforming="{Binding ElementName=HexagonsHolder, Path=CancelTransforming, UpdateSourceTrigger=PropertyChanged}"/>
 
         </Grid>
 
@@ -87,6 +92,7 @@
             <!-- Menu -->
             <menuSettings:MenuSettingsControl Grid.Row="3" IsApplyColor="{Binding ElementName=HexagonsHolder, Path=IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+            <!-- Show routines button -->
             <Button Grid.Row="4" Content="Click me =D"/>
         </Grid>
     </Grid>

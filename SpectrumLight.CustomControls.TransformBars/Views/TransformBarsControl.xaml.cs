@@ -36,6 +36,30 @@ namespace SpectrumLight.CustomControls.TransformBars
             set => SetValue(RotationProperty, value);
         }
 
+        public static readonly DependencyProperty StartTransformingProperty = DependencyProperty.Register(nameof(StartTransforming), typeof(ICommand), typeof(TransformBarsControl), new PropertyMetadata(null));
+
+        public ICommand StartTransforming
+        {
+            get => (ICommand)GetValue(StartTransformingProperty);
+            set => SetValue(StartTransformingProperty, value);
+        }
+
+        public static readonly DependencyProperty FinishTransformingProperty = DependencyProperty.Register(nameof(FinishTransforming), typeof(ICommand), typeof(TransformBarsControl), new PropertyMetadata(null));
+
+        public ICommand FinishTransforming
+        {
+            get => (ICommand)GetValue(FinishTransformingProperty);
+            set => SetValue(FinishTransformingProperty, value);
+        }
+
+        public static readonly DependencyProperty CancelTransformingProperty = DependencyProperty.Register(nameof(CancelTransforming), typeof(ICommand), typeof(TransformBarsControl), new PropertyMetadata(null));
+
+        public ICommand CancelTransforming
+        {
+            get => (ICommand)GetValue(CancelTransformingProperty);
+            set => SetValue(CancelTransformingProperty, value);
+        }
+
         public TransformBarsControl()
         {
             InitializeComponent();
