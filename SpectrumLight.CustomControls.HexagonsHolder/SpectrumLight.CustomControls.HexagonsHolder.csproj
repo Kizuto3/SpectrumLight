@@ -99,6 +99,10 @@
       <Project>{E72BD89A-BF72-4DAC-9443-BAC599E640A7}</Project>
       <Name>SpectrumLight.CommonObjects.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.EventAggregators\SpectrumLight.CommonObjects.EventAggregators.csproj">
+      <Project>{AF07D253-A4D3-412A-A428-53DA44EFD650}</Project>
+      <Name>SpectrumLight.CommonObjects.EventAggregators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpectrumLight.CommonObjects.Implementations\SpectrumLight.CommonObjects.Implementations.csproj">
       <Project>{CE3C30A0-F360-4088-AE47-78625A6FA8E6}</Project>
       <Name>SpectrumLight.CommonObjects.Implementations</Name>

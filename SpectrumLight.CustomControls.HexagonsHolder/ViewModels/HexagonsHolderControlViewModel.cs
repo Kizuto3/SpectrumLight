@@ -1,6 +1,8 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using SpectrumLight.CommonObjects.Abstractions.Enums;
 using SpectrumLight.CommonObjects.Abstractions.Models;
+using SpectrumLight.CommonObjects.EventAggregators;
 using SpectrumLight.CommonObjects.Implementations.Helpers;
 using SpectrumLight.CommonObjects.Wpf.Abstractions;
 using System;
@@ -15,6 +17,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
     public class HexagonsHolderControlViewModel : BaseViewModel
     {
         private int i = 0;
+        private bool _isSecondary;
         private bool _isApplyColor;
         private double _storedScale;
         private double _storedRotation;
@@ -23,6 +26,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
         private double _rotation;
         private double[] _translation = new double[] { 0.0, 0.0 };
         private IApplicationModel _applicationModel;
+        private IHexagonsContainer _defaultContainer;
 
         public IArduinoCommunicator ArduinoCommunicator { get; }
 
@@ -64,7 +68,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
             }
         }
 
-        public IHexagonsContainer HexagonsContainer { get; }
+        public IHexagonsContainer HexagonsContainer { get; set; }
 
         public ObservableCollection<IHexagon> Hexagons { get => HexagonsContainer.Hexagons; }
 
@@ -77,13 +81,25 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
 
         public HexagonsHolderControlViewModel(IApplicationModel applicationModel,
                                               IHexagonsContainer hexagonContainer,
-                                              IArduinoCommunicator arduinoCommunicator) : base(applicationModel)
+                                              IArduinoCommunicator arduinoCommunicator,
+                                              IEventAggregator eventAggregator,
+                                              bool isSedondary = false) : base(applicationModel)
         {
+            _isSecondary = isSedondary;
             _applicationModel = applicationModel;
             HexagonsContainer = hexagonContainer;
             ArduinoCommunicator = arduinoCommunicator;
 
-            FindSpectrumLightPortAndConnect();
+            if (!_isSecondary)
+            {
+                FindSpectrumLightPortAndConnect();
+                eventAggregator.GetEvent<MainContainerChangedEvent>().Subscribe(ContainerChanged);
+                AddHexagon();
+                AddHexagon();
+                AddHexagon();
+                AddHexagon();
+                _defaultContainer = HexagonsContainer;
+            }
 
             Scale = 1;
 
@@ -91,10 +107,6 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
             FinishTransformingCommand = new DelegateCommand(FinishTransforming);
             CancelTransformingCommand = new DelegateCommand(CancelTrasforming);
 
-            AddHexagon();
-            AddHexagon();
-            AddHexagon();
-            AddHexagon();
         }
 
         private async void FindSpectrumLightPortAndConnect()
@@ -129,16 +141,27 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
             });
         }
 
-        private void ComPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        private void ComPort_DataReceived(object sender, 
+            System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            //TODO: you know what to do here
+            BluetoothPort sp = (BluetoothPort)sender;
+
+            string indata = sp.ReadExisting();
+
+            var hexagonInfos = ProtocolParser.Parse(indata);
+
+            foreach(var hexagonInfo in hexagonInfos)
+            {
+                HexagonsContainer.AddHexagon(hexagonInfo[0], hexagonInfo[1], 
+                    0, 0, hexagonInfo[2], _applicationModel.ARGB);
+            }
         }
 
         private void StartTransforming()
         {
             ApplicationModel.IsTransforming = !ApplicationModel.IsTransforming;
 
-            AddHexagon();
+            //AddHexagon();
 
             _storedScale = Scale;
             _storedRotation = Rotation;
@@ -164,6 +187,19 @@ namespace SpectrumLight.CustomControls.HexagonsHolder.ViewModels
             HexagonsContainer.AddHexagon(i, 1, 0, 0, i + 1, _applicationModel.ARGB);
             HexagonsContainer.AddHexagon(i, 2, 0, 0, i + 2, _applicationModel.ARGB);
             HexagonsContainer.AddHexagon(i++, 3, 0, 0, i + 2, _applicationModel.ARGB);
+        }
+
+        private void ContainerChanged(IHexagonsContainer hexagonsContainer)
+        {
+            if(hexagonsContainer == null)
+            {
+                HexagonsContainer = _defaultContainer;
+                RaisePropertyChanged(nameof(Hexagons));
+                return;
+            }
+
+            HexagonsContainer = hexagonsContainer;
+            RaisePropertyChanged(nameof(Hexagons));
         }
     }
 }

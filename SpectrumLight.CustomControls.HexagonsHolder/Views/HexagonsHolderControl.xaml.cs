@@ -25,6 +25,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
         private static double SIZE = 70;
         private static double SQRT3D2 = Math.Sqrt(3) / 2.0;
         private static double PADDING = 0.53;
+        private static bool _isLoaded;
         private double _sizeCoef = 0;
         private double _shiftX = 0;
         private double _shiftY = 0;
@@ -130,22 +131,33 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
         {
             if (CollectionChangedEventHandler == null)
             {
-                CollectionChangedEventHandler = new NotifyCollectionChangedEventHandler((sender, e) =>
+                CollectionChangedEventHandler = new NotifyCollectionChangedEventHandler((sender, args) =>
                 {
-                    Hexagons_CollectionChanged(sender, e, d);
+                    Hexagons_CollectionChanged(sender, args, d);
                 });
             }
+
+            var control = d as HexagonsHolderControl;
 
             if (e.OldValue != null)
             {
                 var coll = e.OldValue as ObservableCollection<IHexagon>;
                 coll.CollectionChanged -= CollectionChangedEventHandler;
+
+                RemoveHexagons(control);
             }
 
-            if(e.NewValue != null)
+            if (e.NewValue != null)
             {
                 var coll = e.NewValue as ObservableCollection<IHexagon>;
                 coll.CollectionChanged += CollectionChangedEventHandler;
+
+                if (!_isLoaded)
+                    return;
+
+                var model = control.DataContext as HexagonsHolderControlViewModel;
+
+                CreateAndPlaceHexagons(coll, model, control);
             }
         }
 
@@ -220,7 +232,7 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
 
         public HexagonsHolderControlViewModel Model { get => DataContext as HexagonsHolderControlViewModel; }
 
-        #region Creating and placing a hexagon control
+        #region Creating, placing and removing a hexagon control / controls
 
         private static HexagonControl CreateHexagonControl(HexagonsHolderControlViewModel mainViewModel, IHexagon hexagon)
         {
@@ -275,6 +287,21 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             holder.InvalidateArrange();
         }
 
+        private static void CreateAndPlaceHexagons(ICollection<IHexagon> hexagons, HexagonsHolderControlViewModel model, HexagonsHolderControl control)
+        {
+            foreach (var hexagon in hexagons)
+            {
+                var hexagonControl = CreateHexagonControl(model, hexagon);
+
+                PlaceHexagonControl(hexagonControl, control, hexagon);
+            }
+        }
+
+        private static void RemoveHexagons(HexagonsHolderControl control)
+        {
+            control.Holder.Children.Clear();
+        }
+
         #endregion
 
         #region Drag
@@ -308,19 +335,51 @@ namespace SpectrumLight.CustomControls.HexagonsHolder
             _isMoving = false;
         }
 
+        private void UserControl_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void UserControl_PreviewTouchMove(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void UserControl_PreviewTouchUp(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void UserControl_PreviewStylusDown(object sender, StylusDownEventArgs e)
+        {
+
+        }
+
+        private void UserControl_PreviewStylusMove(object sender, StylusEventArgs e)
+        {
+
+        }
+
+        private void UserControl_PreviewStylusUp(object sender, StylusEventArgs e)
+        {
+
+        }
+
         #endregion
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            _isLoaded = true;
+
             if (Hexagons == null)
                 return;
 
-            foreach(var hexagon in Hexagons)
-            {
-                var hexagonControl = CreateHexagonControl(Model, hexagon);
+            CreateAndPlaceHexagons(Hexagons, Model, this);
+        }
 
-                PlaceHexagonControl(hexagonControl, this, hexagon);
-            }
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _isMoving = false;
         }
     }
 }

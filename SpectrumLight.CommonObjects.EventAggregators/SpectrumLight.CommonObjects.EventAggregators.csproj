@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE3C30A0-F360-4088-AE47-78625A6FA8E6}</ProjectGuid>
+    <ProjectGuid>{AF07D253-A4D3-412A-A428-53DA44EFD650}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpectrumLight.CommonObjects.Implementations</RootNamespace>
-    <AssemblyName>SpectrumLight.CommonObjects.Implementations</AssemblyName>
+    <RootNamespace>SpectrumLight.CommonObjects.EventAggregators</RootNamespace>
+    <AssemblyName>SpectrumLight.CommonObjects.EventAggregators</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,24 +29,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
     <Reference Include="Prism, Version=8.0.0.1909, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.8.0.0.1909\lib\net47\Prism.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0\lib\net4\System.Management.Automation.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,27 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\BluetoothComPortsSeeker.cs" />
-    <Compile Include="Helpers\ProtocolParser.cs" />
-    <Compile Include="Models\ApplicationModel.cs" />
-    <Compile Include="Models\ArduinoCommunicator.cs" />
-    <Compile Include="Models\Hexagon.cs" />
-    <Compile Include="Models\HexagonsContainer.cs" />
-    <Compile Include="Models\WiFiConnectionManager.cs" />
+    <Compile Include="MainContainerChangedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpectrumLight.CommonObjects.Abstractions\SpectrumLight.CommonObjects.Abstractions.csproj">
-      <Project>{e72bd89a-bf72-4dac-9443-bac599e640a7}</Project>
-      <Name>SpectrumLight.CommonObjects.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpectrumLight.CommonObjects.Wpf\SpectrumLight.CommonObjects.Wpf.csproj">
-      <Project>{1C6D701D-6FC5-412A-A1DF-525999B0DB84}</Project>
-      <Name>SpectrumLight.CommonObjects.Wpf</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\SpectrumLight.CommonObjects.Abstractions\SpectrumLight.CommonObjects.Abstractions.csproj">
+      <Project>{E72BD89A-BF72-4DAC-9443-BAC599E640A7}</Project>
+      <Name>SpectrumLight.CommonObjects.Abstractions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

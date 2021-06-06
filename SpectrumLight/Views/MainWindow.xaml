@@ -93,7 +93,7 @@
             <menuSettings:MenuSettingsControl Grid.Row="3" IsApplyColor="{Binding ElementName=HexagonsHolder, Path=IsApplyColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <!-- Show routines button -->
-            <Button Grid.Row="4" Content="Click me =D"/>
+            <!-- <Button Grid.Row="4" Content="Click me =D" Click="Button_Click"/> -->
         </Grid>
     </Grid>
 </Window>

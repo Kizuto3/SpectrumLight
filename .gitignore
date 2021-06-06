@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/SpectrumLight.CommonObjects.Abstractions/ClassDiagram1.cd
+*.cd

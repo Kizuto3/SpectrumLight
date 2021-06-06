@@ -39,7 +39,7 @@ namespace SpectrumLight.CustomControls.Hexagon.ViewModel
             Debug.WriteLine($"X = {Hexagon.X}, Y = {Hexagon.Y}");
             if (await _communicator.ConnectDevice())
             {
-                _communicator.SendData("da");
+                _communicator.SendData($"{Hexagon.Index},{Hexagon.ARGB}");
             }
         }
     }

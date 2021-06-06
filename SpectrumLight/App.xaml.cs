@@ -9,6 +9,8 @@ using SpectrumLight.CustomControls.ConnectionsBar;
 using SpectrumLight.CustomControls.ConnectionsBar.ViewModel;
 using SpectrumLight.CustomControls.HexagonsHolder;
 using SpectrumLight.CustomControls.HexagonsHolder.ViewModels;
+using SpectrumLight.CustomControls.RoutinesWindow;
+using SpectrumLight.CustomControls.RoutinesWindow.ViewModels;
 
 namespace SpectrumLight
 {
@@ -35,6 +37,7 @@ namespace SpectrumLight
             ViewModelLocationProvider.Register<MainWindow, MainViewModel>();
             ViewModelLocationProvider.Register<HexagonsHolderControl, HexagonsHolderControlViewModel>();
             ViewModelLocationProvider.Register<ConnectionsBarControl, ConnectionsBarControlViewModel>();
+            ViewModelLocationProvider.Register<RoutinesWindowControl, RoutinesWindowControlViewModel>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

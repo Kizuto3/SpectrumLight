@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.MenuSettings", "SpectrumLight.CustomControls.MenuSettings\SpectrumLight.CustomControls.MenuSettings.csproj", "{0540EF83-1F8C-4BB9-9372-13B4DFA9408D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CustomControls.RoutinesWindow", "SpectrumLight.CustomControls.RoutinesWindow\SpectrumLight.CustomControls.RoutinesWindow.csproj", "{248201FA-892D-4336-968D-94930802042C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectrumLight.CommonObjects.EventAggregators", "SpectrumLight.CommonObjects.EventAggregators\SpectrumLight.CommonObjects.EventAggregators.csproj", "{AF07D253-A4D3-412A-A428-53DA44EFD650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,14 @@ Global
 		{0540EF83-1F8C-4BB9-9372-13B4DFA9408D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0540EF83-1F8C-4BB9-9372-13B4DFA9408D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0540EF83-1F8C-4BB9-9372-13B4DFA9408D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248201FA-892D-4336-968D-94930802042C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248201FA-892D-4336-968D-94930802042C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248201FA-892D-4336-968D-94930802042C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248201FA-892D-4336-968D-94930802042C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF07D253-A4D3-412A-A428-53DA44EFD650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF07D253-A4D3-412A-A428-53DA44EFD650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF07D253-A4D3-412A-A428-53DA44EFD650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF07D253-A4D3-412A-A428-53DA44EFD650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +121,8 @@ Global
 		{6C22816A-7E1B-49D2-9774-2BA03323B350} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 		{AE510314-00F8-40D4-BA8A-121E1C666A89} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
 		{0540EF83-1F8C-4BB9-9372-13B4DFA9408D} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
+		{248201FA-892D-4336-968D-94930802042C} = {0849DF5C-01A1-4C1E-8A5B-E1E5875B77B3}
+		{AF07D253-A4D3-412A-A428-53DA44EFD650} = {8E9A4942-94A3-4C2A-A9A4-CC91BE61A09A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D8214DD-5166-48CF-9667-6847A197FCEB}
